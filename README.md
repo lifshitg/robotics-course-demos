@@ -18,3 +18,4 @@ Prepared sessions:
 
 - [Week 1 — ROS 2](week01_ros/TEACHING_NOTES.md): [presentation plan](week01_ros/PRESENTATION_PLAN.md) and [publisher/subscriber demo](week01_ros/demo/README.md).
 - [Week 2 — Coordinate Transforms and tf2](week02_tf/TEACHING_NOTES.md): [presentation plan](week02_tf/PRESENTATION_PLAN.md) and [Python/RViz demo](week02_tf/demo/README.md).
+- [Week 3 — Gazebo and Robot Kinematics](week03_kinematics/TEACHING_NOTES.md): [presentation plan](week03_kinematics/PRESENTATION_PLAN.md) and [two-joint arm demo](week03_kinematics/demo/README.md).

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="kinematics">
+    <physics name="step_1ms" type="ignored"><max_step_size>0.001</max_step_size><real_time_factor>1</real_time_factor></physics>
+    <gravity>0 0 -9.81</gravity>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <light name="sun" type="directional">
+      <pose>0 0 10 0 0 0</pose><diffuse>0.9 0.9 0.9 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.3 0.2 -1</direction><cast_shadows>true</cast_shadows>
+    </light>
+    <model name="ground"><static>true</static><link name="ground_link">
+      <collision name="floor"><geometry><plane><normal>0 0 1</normal><size>10 10</size></plane></geometry></collision>
+      <visual name="floor"><geometry><plane><normal>0 0 1</normal><size>10 10</size></plane></geometry>
+        <material><ambient>0.75 0.78 0.8 1</ambient><diffuse>0.75 0.78 0.8 1</diffuse></material>
+      </visual>
+    </link></model>
+  </world>
+</sdf>
