@@ -14,5 +14,7 @@ Each prepared week contains:
 - `demo/` — code and files for the live demonstration.
 
 Sessions follow three parts: context / recap, core explanation, and live demo.
-Only Week 1 is currently set up. Its [ROS 2 live demo](week01_ros/demo/README.md)
-includes a simple Python publisher and subscriber.
+Prepared sessions:
+
+- [Week 1 — ROS 2](week01_ros/TEACHING_NOTES.md): [presentation plan](week01_ros/PRESENTATION_PLAN.md) and [publisher/subscriber demo](week01_ros/demo/README.md).
+- [Week 2 — Coordinate Transforms and tf2](week02_tf/TEACHING_NOTES.md): [presentation plan](week02_tf/PRESENTATION_PLAN.md) and [Python/RViz demo](week02_tf/demo/README.md).

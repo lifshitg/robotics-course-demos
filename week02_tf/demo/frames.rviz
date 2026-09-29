@@ -1,0 +1,64 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 35; 35; 35
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.5
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+    - Class: rviz_default_plugins/TF
+      Name: Frames
+      Enabled: true
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Marker Scale: 0.5
+      Frames:
+        All Enabled: true
+    - Class: rviz_default_plugins/PointStamped
+      Name: Camera point (larger blue sphere)
+      Enabled: true
+      Topic:
+        Value: /point_camera
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+      Color: 80; 170; 255
+      Alpha: 0.5
+      Radius: 0.07
+      History Length: 1
+    - Class: rviz_default_plugins/PointStamped
+      Name: Base point (smaller orange sphere)
+      Enabled: true
+      Topic:
+        Value: /point_base
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+      Color: 255; 140; 40
+      Alpha: 1
+      Radius: 0.035
+      History Length: 1
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 4
+      Pitch: 0.4
+      Yaw: 0.8
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0.75
+Window Geometry:
+  Width: 1100
+  Height: 750
