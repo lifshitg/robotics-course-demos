@@ -23,11 +23,12 @@
 
 ## Live Demo
 
-- Planned demonstration: start a simple publisher and subscriber in separate terminals and observe messages arriving.
+- Show the short Python scripts side by side: identify the node names, matching topic and message type, publisher timer, and subscriber callback.
+- Start the publisher and subscriber in separate terminals and observe numbered greetings on `/chatter`.
 - List the running nodes and topics, then inspect the example topic and echo its messages.
 - Stop the subscriber and show that the publisher can continue running; restart the subscriber and observe new messages arriving.
 - Ask students to map the terminal output to the publisher → topic → subscriber diagram.
-- Demo code and launch instructions will be prepared later in `demo/`.
+- Follow the [demo instructions](demo/README.md). Budget the 25-minute demo block as 5 minutes code walkthrough, 8 minutes running and inspecting, 7 minutes experiments, and 5 minutes questions and wrap-up.
 
 ## Timing
 
@@ -35,7 +36,7 @@
 | --- | ---: | --- |
 | Context / recap | 5 | Robotics motivation and session goal |
 | Core explanation | 15 | Concepts, architecture diagram, and CLI introduction |
-| Live demo, questions, and wrap-up | 25 | Observe communication, inspect the system, and recap |
+| Live demo, questions, and wrap-up | 25 | Read the code, observe communication, inspect the system, and recap |
 | **Total** | **45** | |
 
 ## Common Questions / Problems
@@ -55,7 +56,7 @@
 ## Preparation Checklist
 
 - [ ] Confirm the course ROS 2 distribution, operating system, and environment setup.
-- [ ] Prepare and test the publisher/subscriber demo and its instructions.
+- [ ] Rehearse `demo/publisher.py` and `demo/subscriber.py` using the demo README.
 - [ ] Rehearse starting, stopping, and restarting the nodes in separate terminals.
 - [ ] Verify the CLI commands against the chosen demo's actual node and topic names.
 - [ ] Check terminal readability and prepare a small sample of expected output as a fallback.
