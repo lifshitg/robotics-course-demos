@@ -1,0 +1,8 @@
+{
+  "size": [6, 6],
+  "empty_radius": 0.12,
+  "loaded_radius": 0.25,
+  "locations": {"pickup": [1, 3], "delivery": [5, 3], "upper-left": [2, 5.4], "upper-right": [4, 5.4]},
+  "obstacles": [[2.8, 3.2, 0, 2.8], [2.8, 3.2, 3.2, 4.8]],
+  "connections": [["pickup", "delivery"], ["pickup", "upper-left"], ["upper-left", "upper-right"], ["upper-right", "delivery"]]
+}
