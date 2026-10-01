@@ -19,13 +19,15 @@ NumPy 1.26.4 and Matplotlib 3.6.3. Temporary environments can be recreated after
 
 ## Controls
 
+- **Training epsilon slider:** choose 0–100% exploration (default 20%). Changes apply to subsequent training actions without clearing Q-values. There is no automatic decay; evaluation always stays greedy.
+
 - **Step:** one training transition and Q update. It exits evaluation without clearing training.
 - **Train 100 episodes:** finish 100 more episodes, including the current partial
   episode. The window refreshes after each episode. Step/Evaluate wait until the batch ends;
   Reset can interrupt it. Ten batches reach 1,000 completed episodes.
 - **Evaluate:** animate a greedy rollout from the start. Q, training position,
   episode history, and training RNG are preserved. Step/Train return to training.
-- **Reset:** restore seed, zero Q-table, initial state, and empty history.
+- **Reset:** restore seed, zero Q-table, initial state, and empty history, keeping your selected epsilon.
 - Click a free cell to inspect its four Q-values. Close the window to stop.
 
 The blue marker is the current agent, green arrows use fixed up/right/down/left
@@ -41,8 +43,8 @@ walls `(1,1)`, `(1,2)`, `(2,2)`, `(3,1)`, `(3,3)`. Moves are up/right/down/left.
 Blocked moves stay put. Each ordinary transition gives −1; goal arrival gives +10
 instead and terminates. A 100-step cap truncates collection and retains bootstrapping.
 
-Zero Q-table; alpha=.2; gamma=.95; seed 7; epsilon=`max(.05,1−episode/800)` with
-episode 0 first. Training uses sampled transitions, not a route planner.
+Zero Q-table; alpha=.2; gamma=.95; seed 7; default training epsilon=0.2 (20% random actions, 80% greedy).
+Evaluation uses epsilon=0. Training uses sampled transitions, not a route planner.
 
 After 1,000 episodes, expected greedy evaluation:
 
@@ -51,7 +53,7 @@ success: true
 length: 8
 raw_return: 3.0
 discounted_return: 0.9501188828124985
-path: (4,0) → (3,0) → (2,0) → (1,0) → (0,0) → (0,1) → (0,2) → (0,3) → (0,4)
+path: (4,0) → (4,1) → (4,2) → (4,3) → (4,4) → (3,4) → (2,4) → (1,4) → (0,4)
 ```
 
 Seven −1 rewards precede +10. Discounting produces a different sum than raw rewards.
@@ -67,6 +69,7 @@ python week08_q_learning/demo/demo.py --export /tmp/week08-figures
 python -m unittest discover -s week08_q_learning/demo -p 'test_*.py' -v
 ```
 
+Use `--epsilon 0.35` to start with 35% exploration in the GUI or headless run.
 GUI starts untrained. `--episodes` controls headless/export training only.
 Headless commands save `q_table.npy` and `metrics.json` (settings, training history,
 and evaluation path/returns). Default output is `demo/output/`, ignored by Git.

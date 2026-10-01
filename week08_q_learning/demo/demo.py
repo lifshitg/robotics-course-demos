@@ -4,16 +4,16 @@ import json
 from pathlib import Path
 import numpy as np
 from gridworld import START, GOAL, WALLS, MOVES, NAMES, valid
-from learning import Learner, epsilon, evaluate
+from learning import Learner, TRAINING_EPSILON, evaluate
 
 
 class Demo:
-    def __init__(self, seed=7):
+    def __init__(self, seed=7, epsilon=TRAINING_EPSILON):
         import matplotlib.pyplot as plt
-        from matplotlib.widgets import Button
+        from matplotlib.widgets import Button, Slider
         self.plt=plt
         self.seed=seed
-        self.learner=Learner(seed)
+        self.learner=Learner(seed, epsilon)
         self.selected=START
         self.batch_target=None
         self.evaluation=None
@@ -23,16 +23,22 @@ class Demo:
         self.grid=self.fig.add_subplot(gs[:,0])
         self.panel=self.fig.add_subplot(gs[0,1])
         self.chart=self.fig.add_subplot(gs[1,1])
-        self.fig.subplots_adjust(bottom=.18,top=.88,wspace=.25,hspace=.35)
+        self.fig.subplots_adjust(bottom=.25,top=.88,wspace=.25,hspace=.35)
         self.buttons=[]
         for x,label,fn in [(.08,'Step',self.step),(.29,'Train 100 episodes',self.train_batch),(.52,'Evaluate',self.start_evaluation),(.75,'Reset',self.reset)]:
             b=Button(self.fig.add_axes([x,.045,.18,.06]),label)
             b.on_clicked(fn);self.buttons.append(b)
+        self.epsilon_slider=Slider(self.fig.add_axes([.30,.15,.55,.025]), 'Training epsilon', 0, 100, valinit=epsilon*100, valfmt='%0.0f%%', valstep=1)
+        self.epsilon_slider.on_changed(self.change_epsilon)
         self.fig.canvas.mpl_connect('button_press_event',self.select)
         self.fig.canvas.mpl_connect('close_event',lambda e:self.timer.stop())
         self.timer=self.fig.canvas.new_timer(interval=150)
         self.timer.add_callback(self.tick)
         self.timer.start()
+        self.render()
+
+    def change_epsilon(self, percent):
+        self.learner.set_epsilon(percent/100)
         self.render()
 
     def step(self,event=None):
@@ -53,7 +59,7 @@ class Demo:
         self.render()
 
     def reset(self,event=None):
-        self.learner=Learner(self.seed)
+        self.learner=Learner(self.seed, self.learner.epsilon)
         self.batch_target=self.evaluation=None
         self.frame=0;self.selected=START
         self.render()
@@ -95,7 +101,7 @@ class Demo:
         ax.set_title('Greedy arrows (fixed tie order)\nClick a cell to inspect its Q-values',fontsize=11)
         self.panel.clear();self.panel.axis('off')
         l=self.learner
-        lines=[f'Completed episodes: {l.episode} | next epsilon: {epsilon(l.episode):.3f}',
+        lines=[f'Completed episodes: {l.episode} | training epsilon: {l.epsilon:.0%}',
                f'Current training state: {l.state}; steps: {l.steps}',
                f'Q-values at {self.selected}:',
                '  '+'  '.join(f'{n}={v:.2f}' for n,v in zip(NAMES,l.q[self.selected])),'']
@@ -131,12 +137,13 @@ def save_results(learner,output):
     np.save(output/'q_table.npy',learner.q)
     result=evaluate(learner.q)
     (output/'metrics.json').write_text(json.dumps(dict(seed=learner.seed,episodes=learner.episode,
-         alpha=.2,gamma=.95,evaluation=result,training=learner.history),indent=2)+'\n')
+         alpha=.2,gamma=.95,training_epsilon=learner.epsilon,evaluation=result,training=learner.history),indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k != "path"},indent=2))
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--epsilon',type=float,default=TRAINING_EPSILON,help='Training exploration probability, 0 to 1 (default: 0.2).')
     p.add_argument('--seed',type=int,default=7)
     p.add_argument('--episodes',type=int,default=1000,help='Headless/export training count; GUI starts untrained.')
     p.add_argument('--headless',action='store_true')
@@ -144,10 +151,11 @@ def main():
     p.add_argument('--output',type=Path,default=Path(__file__).with_name('output'))
     a=p.parse_args()
     if a.episodes<0 or a.seed<0:p.error('Episodes and seed must be nonnegative.')
+    if not np.isfinite(a.epsilon) or not 0<=a.epsilon<=1:p.error('Epsilon must be between 0 and 1.')
     if a.headless or a.export:
         import matplotlib
         matplotlib.use('Agg')
-        app=Demo(a.seed)
+        app=Demo(a.seed,a.epsilon)
         output=a.export or a.output
         output.mkdir(parents=True,exist_ok=True)
         if a.export:app.fig.savefig(output/'before.png',dpi=140)
@@ -158,7 +166,7 @@ def main():
             app.fig.savefig(output/'after.png',dpi=140)
         app.plt.close(app.fig)
     else:
-        app=Demo(a.seed);app.plt.show()
+        app=Demo(a.seed,a.epsilon);app.plt.show()
 
 
 if __name__=='__main__':main()

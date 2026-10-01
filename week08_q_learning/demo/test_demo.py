@@ -8,7 +8,7 @@ from pathlib import Path
 import unittest
 import numpy as np
 from gridworld import START, GOAL, WALLS, MOVES, transition
-from learning import Learner, update, epsilon, evaluate
+from learning import Learner, update, TRAINING_EPSILON, evaluate
 from demo import Demo, save_results
 
 
@@ -28,15 +28,32 @@ class Tests(unittest.TestCase):
         d=update(q,(0,3),1,10,GOAL,True)
         self.assertEqual(d['target'],10);self.assertEqual(d['new'],2)
 
-    def test_truncation_and_schedule(self):
+    def test_truncation_and_constant_exploration(self):
         l=Learner();l.steps=99;l.q[:]=4
         d=l.step()
         self.assertTrue(d['truncated']);self.assertFalse(d['terminated'])
         self.assertAlmostEqual(d['target'],2.8)
         self.assertEqual(l.history[0]['length'],100)
         self.assertEqual(l.state,START);self.assertEqual(l.episode,1)
-        self.assertEqual(epsilon(0),1);self.assertAlmostEqual(epsilon(400),.5)
-        self.assertEqual(epsilon(1000),.05)
+        self.assertEqual(TRAINING_EPSILON,.2)
+        for episode in [0,100,1000]:
+            learner=Learner();learner.episode=episode
+            self.assertEqual(learner.step()["epsilon"],.2)
+
+    def test_adjustable_epsilon(self):
+        for value in [-.1,1.1,float("nan")]:
+            with self.assertRaises(ValueError):Learner(epsilon=value)
+        app=Demo()
+        app.step();q=app.learner.q.copy()
+        app.epsilon_slider.set_val(100)
+        np.testing.assert_array_equal(q,app.learner.q)
+        app.step();self.assertTrue(app.learner.last["exploratory"])
+        app.epsilon_slider.set_val(0)
+        app.step();self.assertFalse(app.learner.last["exploratory"])
+        app.epsilon_slider.set_val(35)
+        app.reset();self.assertEqual(app.learner.epsilon,.35)
+        self.assertEqual(app.epsilon_slider.val,35)
+        app.plt.close(app.fig)
 
     def test_reproducibility_and_evaluation_isolation(self):
         a,b=Learner(),Learner();a.train(100);b.train(100)

@@ -37,7 +37,7 @@ For true termination, target is reward only. Interpret alpha as how far to move 
 - First goal transition: old Q=0, reward=10, terminal target=10, new Q=2.
 - Hitting the 100-step cap is **truncation**, not reaching a terminal state. Keep the bootstrap term, then restart data collection from the start. Time is not part of this task's state; the cap is an external collection limit.
 
-Defaults: zero Q-table, alpha=.2, gamma=.95, seed 7, 1,000 training episodes. Epsilon is `max(.05,1−episode/800)` with zero-based episode indexing. These finite-run settings are practical teaching defaults, not a general convergence guarantee.
+Defaults: zero Q-table, alpha=.2, gamma=.95, seed 7, 1,000 training episodes. Training epsilon defaults to 0.2: 20% random exploration and 80% greedy selection. The slider changes it for subsequent training actions without clearing Q-values; it stays fixed until changed manually. Evaluation uses epsilon=0. These finite-run settings are practical teaching defaults, not a general convergence guarantee.
 
 ## Live Demo
 
@@ -48,7 +48,7 @@ Use the [runbook](demo/README.md).
 - **5 min:** continue training toward 1,000 episodes; evaluate the greedy route. Show that training can take extra exploratory moves even after a good route is learned.
 - **4 min:** compare initial/final figures, raw versus discounted return, and reset behavior.
 
-Expected default outcome: success in 8 moves, raw return 3, discounted return .950119. Example route goes up the left column and right across the top. Other seeds may choose another equally short route.
+Expected default outcome: success in 8 moves, raw return 3, discounted return .950119. The default route goes right across the bottom row and up the right column. Other seeds may choose another equally short route.
 
 Checkpoint answers: the environment supplies reward, not a correct action label; the max chooses the greedy target action; exploration selects behavior; evaluation changes neither Q nor the training random generator. Repeating a deterministic evaluation from the same start is not independent evidence of robustness.
 

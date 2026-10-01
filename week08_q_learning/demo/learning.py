@@ -3,8 +3,7 @@ import numpy as np
 from gridworld import START, transition
 
 
-def epsilon(episode):
-    return max(.05, 1-episode/800)
+TRAINING_EPSILON = 0.2
 
 
 def update(q, state, action, reward, nxt, terminated, alpha=.2, gamma=.95):
@@ -16,7 +15,8 @@ def update(q, state, action, reward, nxt, terminated, alpha=.2, gamma=.95):
 
 
 class Learner:
-    def __init__(self, seed=7):
+    def __init__(self, seed=7, epsilon=TRAINING_EPSILON):
+        self.set_epsilon(epsilon)
         self.seed = seed
         self.rng = np.random.default_rng(seed)
         self.q = np.zeros((5,5,4))
@@ -26,9 +26,14 @@ class Learner:
         self.history = []
         self.last = None
 
+    def set_epsilon(self, value):
+        if not np.isfinite(value) or not 0 <= value <= 1:
+            raise ValueError("Epsilon must be finite and between 0 and 1.")
+        self.epsilon = float(value)
+
     def step(self):
         state = self.state
-        eps = epsilon(self.episode)
+        eps = self.epsilon
         exploratory = bool(self.rng.random() < eps)
         action = int(self.rng.integers(4)) if exploratory else int(self.rng.choice(np.flatnonzero(self.q[state] == self.q[state].max())))
         nxt, reward, terminated = transition(state, action)

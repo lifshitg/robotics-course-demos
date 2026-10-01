@@ -32,7 +32,7 @@ A compact explanation followed by a focused 17-minute demonstration.
 
 - Epsilon-greedy: random action with probability epsilon, greedy otherwise.
 - Exploration can choose a greedy action by chance.
-- Show decreasing epsilon with a .05 floor.
+- Default training epsilon is .2: 20% random exploration, 80% greedy selection. Use the slider to compare exploration levels; there is no automatic decay. Evaluation uses epsilon=0.
 
 ## Slide 7 — The Q-Learning Update
 
