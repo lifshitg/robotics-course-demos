@@ -1,0 +1,845 @@
+[
+  {
+    "training_seed": 7,
+    "test_seeds": [
+      20000,
+      20001,
+      20002,
+      20003,
+      20004,
+      20005,
+      20006,
+      20007,
+      20008,
+      20009,
+      20010,
+      20011,
+      20012,
+      20013,
+      20014,
+      20015,
+      20016,
+      20017,
+      20018,
+      20019
+    ],
+    "initial": {
+      "mean_return": 27.45,
+      "mean_length": 28.45,
+      "reached_limit": 0,
+      "checkpoint_steps": 0,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20001,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20002,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20003,
+          "return_": 39.0,
+          "length": 40,
+          "reached_limit": false
+        },
+        {
+          "seed": 20004,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20005,
+          "return_": 28.0,
+          "length": 29,
+          "reached_limit": false
+        },
+        {
+          "seed": 20006,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20007,
+          "return_": 25.0,
+          "length": 26,
+          "reached_limit": false
+        },
+        {
+          "seed": 20008,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20009,
+          "return_": 30.0,
+          "length": 31,
+          "reached_limit": false
+        },
+        {
+          "seed": 20010,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20011,
+          "return_": 26.0,
+          "length": 27,
+          "reached_limit": false
+        },
+        {
+          "seed": 20012,
+          "return_": 47.0,
+          "length": 48,
+          "reached_limit": false
+        },
+        {
+          "seed": 20013,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20014,
+          "return_": 37.0,
+          "length": 38,
+          "reached_limit": false
+        },
+        {
+          "seed": 20015,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20016,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20017,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20018,
+          "return_": 33.0,
+          "length": 34,
+          "reached_limit": false
+        },
+        {
+          "seed": 20019,
+          "return_": 48.0,
+          "length": 49,
+          "reached_limit": false
+        }
+      ]
+    },
+    "trained": {
+      "mean_return": 1000.0,
+      "mean_length": 1000.0,
+      "reached_limit": 20,
+      "checkpoint_steps": 100000,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20001,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20002,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20003,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20004,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20005,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20006,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20007,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20008,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20009,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20010,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20011,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20012,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20013,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20014,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20015,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20016,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20017,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20018,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20019,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        }
+      ]
+    }
+  },
+  {
+    "training_seed": 0,
+    "test_seeds": [
+      20000,
+      20001,
+      20002,
+      20003,
+      20004,
+      20005,
+      20006,
+      20007,
+      20008,
+      20009,
+      20010,
+      20011,
+      20012,
+      20013,
+      20014,
+      20015,
+      20016,
+      20017,
+      20018,
+      20019
+    ],
+    "initial": {
+      "mean_return": 27.0,
+      "mean_length": 28.0,
+      "reached_limit": 0,
+      "checkpoint_steps": 0,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20001,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20002,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20003,
+          "return_": 39.0,
+          "length": 40,
+          "reached_limit": false
+        },
+        {
+          "seed": 20004,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20005,
+          "return_": 28.0,
+          "length": 29,
+          "reached_limit": false
+        },
+        {
+          "seed": 20006,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20007,
+          "return_": 25.0,
+          "length": 26,
+          "reached_limit": false
+        },
+        {
+          "seed": 20008,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20009,
+          "return_": 29.0,
+          "length": 30,
+          "reached_limit": false
+        },
+        {
+          "seed": 20010,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20011,
+          "return_": 26.0,
+          "length": 27,
+          "reached_limit": false
+        },
+        {
+          "seed": 20012,
+          "return_": 48.0,
+          "length": 49,
+          "reached_limit": false
+        },
+        {
+          "seed": 20013,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20014,
+          "return_": 36.0,
+          "length": 37,
+          "reached_limit": false
+        },
+        {
+          "seed": 20015,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20016,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20017,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20018,
+          "return_": 33.0,
+          "length": 34,
+          "reached_limit": false
+        },
+        {
+          "seed": 20019,
+          "return_": 41.0,
+          "length": 42,
+          "reached_limit": false
+        }
+      ]
+    },
+    "trained": {
+      "mean_return": 219.15,
+      "mean_length": 220.15,
+      "reached_limit": 0,
+      "checkpoint_steps": 25000,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 172.0,
+          "length": 173,
+          "reached_limit": false
+        },
+        {
+          "seed": 20001,
+          "return_": 187.0,
+          "length": 188,
+          "reached_limit": false
+        },
+        {
+          "seed": 20002,
+          "return_": 213.0,
+          "length": 214,
+          "reached_limit": false
+        },
+        {
+          "seed": 20003,
+          "return_": 218.0,
+          "length": 219,
+          "reached_limit": false
+        },
+        {
+          "seed": 20004,
+          "return_": 263.0,
+          "length": 264,
+          "reached_limit": false
+        },
+        {
+          "seed": 20005,
+          "return_": 201.0,
+          "length": 202,
+          "reached_limit": false
+        },
+        {
+          "seed": 20006,
+          "return_": 230.0,
+          "length": 231,
+          "reached_limit": false
+        },
+        {
+          "seed": 20007,
+          "return_": 220.0,
+          "length": 221,
+          "reached_limit": false
+        },
+        {
+          "seed": 20008,
+          "return_": 183.0,
+          "length": 184,
+          "reached_limit": false
+        },
+        {
+          "seed": 20009,
+          "return_": 236.0,
+          "length": 237,
+          "reached_limit": false
+        },
+        {
+          "seed": 20010,
+          "return_": 206.0,
+          "length": 207,
+          "reached_limit": false
+        },
+        {
+          "seed": 20011,
+          "return_": 263.0,
+          "length": 264,
+          "reached_limit": false
+        },
+        {
+          "seed": 20012,
+          "return_": 193.0,
+          "length": 194,
+          "reached_limit": false
+        },
+        {
+          "seed": 20013,
+          "return_": 200.0,
+          "length": 201,
+          "reached_limit": false
+        },
+        {
+          "seed": 20014,
+          "return_": 261.0,
+          "length": 262,
+          "reached_limit": false
+        },
+        {
+          "seed": 20015,
+          "return_": 180.0,
+          "length": 181,
+          "reached_limit": false
+        },
+        {
+          "seed": 20016,
+          "return_": 230.0,
+          "length": 231,
+          "reached_limit": false
+        },
+        {
+          "seed": 20017,
+          "return_": 187.0,
+          "length": 188,
+          "reached_limit": false
+        },
+        {
+          "seed": 20018,
+          "return_": 257.0,
+          "length": 258,
+          "reached_limit": false
+        },
+        {
+          "seed": 20019,
+          "return_": 283.0,
+          "length": 284,
+          "reached_limit": false
+        }
+      ]
+    }
+  },
+  {
+    "training_seed": 1,
+    "test_seeds": [
+      20000,
+      20001,
+      20002,
+      20003,
+      20004,
+      20005,
+      20006,
+      20007,
+      20008,
+      20009,
+      20010,
+      20011,
+      20012,
+      20013,
+      20014,
+      20015,
+      20016,
+      20017,
+      20018,
+      20019
+    ],
+    "initial": {
+      "mean_return": 26.95,
+      "mean_length": 27.95,
+      "reached_limit": 0,
+      "checkpoint_steps": 0,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20001,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20002,
+          "return_": 19.0,
+          "length": 20,
+          "reached_limit": false
+        },
+        {
+          "seed": 20003,
+          "return_": 39.0,
+          "length": 40,
+          "reached_limit": false
+        },
+        {
+          "seed": 20004,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20005,
+          "return_": 28.0,
+          "length": 29,
+          "reached_limit": false
+        },
+        {
+          "seed": 20006,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20007,
+          "return_": 25.0,
+          "length": 26,
+          "reached_limit": false
+        },
+        {
+          "seed": 20008,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20009,
+          "return_": 29.0,
+          "length": 30,
+          "reached_limit": false
+        },
+        {
+          "seed": 20010,
+          "return_": 22.0,
+          "length": 23,
+          "reached_limit": false
+        },
+        {
+          "seed": 20011,
+          "return_": 26.0,
+          "length": 27,
+          "reached_limit": false
+        },
+        {
+          "seed": 20012,
+          "return_": 48.0,
+          "length": 49,
+          "reached_limit": false
+        },
+        {
+          "seed": 20013,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20014,
+          "return_": 36.0,
+          "length": 37,
+          "reached_limit": false
+        },
+        {
+          "seed": 20015,
+          "return_": 20.0,
+          "length": 21,
+          "reached_limit": false
+        },
+        {
+          "seed": 20016,
+          "return_": 21.0,
+          "length": 22,
+          "reached_limit": false
+        },
+        {
+          "seed": 20017,
+          "return_": 23.0,
+          "length": 24,
+          "reached_limit": false
+        },
+        {
+          "seed": 20018,
+          "return_": 33.0,
+          "length": 34,
+          "reached_limit": false
+        },
+        {
+          "seed": 20019,
+          "return_": 41.0,
+          "length": 42,
+          "reached_limit": false
+        }
+      ]
+    },
+    "trained": {
+      "mean_return": 1000.0,
+      "mean_length": 1000.0,
+      "reached_limit": 20,
+      "checkpoint_steps": 75000,
+      "per_episode": [
+        {
+          "seed": 20000,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20001,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20002,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20003,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20004,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20005,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20006,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20007,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20008,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20009,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20010,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20011,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20012,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20013,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20014,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20015,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20016,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20017,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20018,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        },
+        {
+          "seed": 20019,
+          "return_": 1000.0,
+          "length": 1000,
+          "reached_limit": true
+        }
+      ]
+    }
+  }
+]
