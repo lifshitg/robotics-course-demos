@@ -25,3 +25,4 @@ Prepared sessions:
 - [Week 7 — Imitation Learning in MuJoCo](week07_imitation_learning/TEACHING_NOTES.md): [presentation plan](week07_imitation_learning/PRESENTATION_PLAN.md) and [expert-to-learner demo](week07_imitation_learning/demo/README.md).
 - [Week 8 — Q-Learning](week08_q_learning/TEACHING_NOTES.md): [presentation plan](week08_q_learning/PRESENTATION_PLAN.md) and [interactive Gridworld demo](week08_q_learning/demo/README.md).
 - [Week 9 — Policy Gradients and Actor–Critic](week09_actor_critic/TEACHING_NOTES.md): [presentation plan](week09_actor_critic/PRESENTATION_PLAN.md) and [MuJoCo actor–critic demo](week09_actor_critic/demo/README.md).
+- [Week 10 — POMDP Foundations and Belief Updates](week10_pomdp/TEACHING_NOTES.md): [presentation plan](week10_pomdp/PRESENTATION_PLAN.md) and [board-work guide](week10_pomdp/demo/README.md).
