@@ -12,7 +12,8 @@ The sessions are structured to progressively bridge theoretical concepts with pr
 * **Session 7 (Imitation Learning & MuJoCo):** Introduction to the MuJoCo simulator, defining continuous state/action spaces, and basic Behavior Cloning.
 * **Session 8 (Q-Learning / Value-Based RL):** RL loop, returns, action values, exploration versus exploitation, and Q-learning with a small Gridworld demo.
 * **Session 9 (Policy Gradients / Policy-Based RL):** Neural policies for continuous control, policy-gradient and actor–critic intuition, and PPO/SAC overview with a MuJoCo demo.
-* **Sessions 10–11 (POMDPs):** Partial observability, belief states, Bayesian belief updates, and planning under uncertainty. Divide the material between these two sessions during later week preparation.
+* **Session 10 (POMDP 1):** Partial observability, observations, belief states, belief updates, and planning under uncertainty.
+* **Session 11 (POMDP 2):** Short recap followed by a detailed walkthrough of the POMDP homework solution, emphasizing belief updates and common mistakes.
 * **Session 12 (Filters & SLAM):** Particle filters, motion/measurement updates, and an introduction to Simultaneous Localization and Mapping.
 * **Session 13 (Foundation Models & Perception):** Utilizing modern vision-language models for semantic understanding and extracting observations.
 
