@@ -10,8 +10,9 @@ The sessions are structured to progressively bridge theoretical concepts with pr
 * **Session 5 (Classical Planning & TAMP):** Writing symbolic domains/problems and linking discrete high-level actions back to geometric feasibility.
 * **Session 6 (MDPs):** Formulating Markov Decision Processes, state transitions, and dynamic programming algorithms (Value/Policy Iteration).
 * **Session 7 (Imitation Learning & MuJoCo):** Introduction to the MuJoCo simulator, defining continuous state/action spaces, and basic Behavior Cloning.
-* **Sessions 8, 9, 10 (Reinforcement Learning):** Spanning the RL pipeline from Q-learning to policy gradients and continuous control algorithms (e.g., SAC, PPO).
-* **Session 11 (POMDPs):** Dealing with partial observability, belief state updates, and transition dynamics under uncertainty.
+* **Session 8 (Q-Learning / Value-Based RL):** RL loop, returns, action values, exploration versus exploitation, and Q-learning with a small Gridworld demo.
+* **Session 9 (Policy Gradients / Policy-Based RL):** Neural policies for continuous control, policy-gradient and actor–critic intuition, and PPO/SAC overview with a MuJoCo demo.
+* **Sessions 10–11 (POMDPs):** Partial observability, belief states, Bayesian belief updates, and planning under uncertainty. Divide the material between these two sessions during later week preparation.
 * **Session 12 (Filters & SLAM):** Particle filters, motion/measurement updates, and an introduction to Simultaneous Localization and Mapping.
 * **Session 13 (Foundation Models & Perception):** Utilizing modern vision-language models for semantic understanding and extracting observations.
 
