@@ -4,13 +4,13 @@ A visual aid for theory: predict → weight → resample. No classroom code walk
 
 ## Setup and launch
 
-From this folder, using Python 3.10 or newer:
+From the repository root (`robotics-course-demos/`), using Python 3.10 or newer:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-python visualize.py
+python -m pip install -r week12_filters_slam/demo/requirements.txt
+python week12_filters_slam/demo/visualize.py
 ```
 
 ## Controls and classroom sequence
@@ -27,10 +27,12 @@ Orange star/path = simulator truth for explanation only. Red X = weighted estima
 
 ## Headless and fallback figures
 
+Run these commands from the repository root with the virtual environment active:
+
 ```bash
-python visualize.py --headless --output /tmp/week12-low
-python visualize.py --headless --sigma 0.6 --output /tmp/week12-high
-python -m unittest discover -v
+python week12_filters_slam/demo/visualize.py --headless --output /tmp/week12-low
+python week12_filters_slam/demo/visualize.py --headless --sigma 0.6 --output /tmp/week12-high
+python -m unittest discover -s week12_filters_slam/demo -p 'test_*.py' -v
 ```
 
 Headless mode saves four snapshots of the first cycle, then runs all 32 motion cycles and prints the final position error and weight sum. `--seed` defaults to 7. Saved classroom images: [initial](figures/initial.png), [prediction](figures/prediction.png), [weighting](figures/weighting.png), [resampling](figures/resampling.png). These are seeded illustrations, not accuracy guarantees.
