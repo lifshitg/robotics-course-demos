@@ -32,3 +32,4 @@ Prepared sessions:
 Planned sessions:
 
 - [Week 11 — POMDP Homework Walkthrough (planned)](week11_pomdp/README.md).
+- [Week 13 — Foundation Models & Perception (conditional)](week13_foundation_models/README.md).
