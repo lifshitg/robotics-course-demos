@@ -1,4 +1,4 @@
-# Week 1 — ROS 2 Live Demo
+# Week 1 — ROS Basics: ROS 2 Live Demo
 
 Two small Python nodes demonstrate message flow:
 
@@ -10,6 +10,11 @@ greeting_publisher → /chatter (std_msgs/msg/String) → greeting_subscriber
 - [subscriber.py](subscriber.py) prints each greeting it receives.
 
 Run the scripts directly with Python; no package build is needed for this demo.
+
+This is the practical example for the [ROS basics presentation](../PRESENTATION_PLAN.md).
+Reserve 20 minutes: 7 minutes reading code, 6 minutes running/inspecting,
+4 minutes stop/restart experiments, and 3 minutes questions/recap. The preceding
+explanation takes 25 minutes, for a 45-minute session.
 
 ## Setup
 
@@ -61,6 +66,7 @@ ones. Allow a moment for the nodes to discover each other.
 ros2 node list
 ros2 topic list
 ros2 topic info /chatter
+ros2 topic info /chatter --verbose
 ros2 interface show std_msgs/msg/String
 ros2 topic echo /chatter
 ```
@@ -70,28 +76,65 @@ Expect `/greeting_publisher` and `/greeting_subscriber` in the node list, and
 `echo`, topic info should show type `std_msgs/msg/String`, one publisher, and one
 subscriber. `echo` adds another subscriber while it runs. Press Ctrl+C to stop it.
 
+The verbose view adds endpoint names and QoS profiles. For the demo endpoints,
+look for KEEP_LAST, depth 10, RELIABLE, and VOLATILE. Stop echo before checking
+counts again; allow discovery time for counts to update. To observe echo's extra
+subscription while it runs, use another configured terminal if available.
+
 ## Show the Code
 
-Spend about 5 minutes with the two scripts side by side:
+Spend about 7 minutes with the two scripts side by side:
 
-1. Find the node names passed to `Node` through `super().__init__`.
+1. Identify `rclpy`, the `Node` base class, and `String` from `std_msgs`. Find the
+   node names passed through `super().__init__`; distinguish ROS node names from
+   Python class names and filenames. Each script runs one node in one process.
 2. Match `String` and `/chatter` in `create_publisher` and `create_subscription`.
 3. Trace the publisher timer → `message.data` → `publish(message)`.
 4. Trace the subscriber callback → `message.data` → terminal log.
-5. Explain that `spin` processes callbacks, and `10` is the message queue depth,
-   not a frequency. The timer's `1.0` sets the interval in seconds.
+5. Explain that `10` selects KEEP_LAST history depth with other QoS defaults,
+   including reliable delivery and volatile durability. It is not a frequency
+   or a promise to replay ten messages to a new subscriber. The timer's `1.0`
+   sets the intended interval in seconds, without a hard timing guarantee.
+6. Trace `rclpy.init()` → node/endpoints/timer construction → `rclpy.spin(node)`.
+   The default single-threaded executor waits for ready work and runs callbacks;
+   long callbacks delay other work on that executor. DDS discovery and data
+   reception are distinct from callback execution.
+7. Trace the shutdown exceptions and `finally`: `destroy_node()` releases resources;
+   `try_shutdown()` shuts down the context if needed. These are ordinary `Node`
+   instances, not managed lifecycle nodes with configure/activate transitions.
+
+Connect publication to the slide's application → `rclpy` → `rcl` → `rmw` → DDS
+stack. Both endpoints use the same domain, topic/type, and compatible QoS. The
+localhost setup makes this a local demonstration of distributed communication;
+it does not exercise communication between separate computers.
+
+References: [Jazzy endpoint depth handling](https://github.com/ros2/rclpy/blob/jazzy/rclpy/rclpy/node.py),
+[default executor and spin](https://github.com/ros2/rclpy/blob/jazzy/rclpy/rclpy/__init__.py),
+[verbose topic inspection](https://github.com/ros2/ros2cli/blob/jazzy/ros2topic/ros2topic/verb/info.py).
 
 ## Live Experiments
+
+Use 4 minutes for the two stop/restart experiments. Ask for predictions first.
 
 - Stop only the subscriber with Ctrl+C. The publisher keeps sending. Restart the
   subscriber and observe new messages arriving without replaying missed greetings.
 - While the subscriber runs, stop the publisher. Reception stops; restart it and
-  observe the counter begin again at zero once discovery completes.
-- If time permits, start a second subscriber in another prepared terminal:
+  observe the counter reset to zero in the publisher's log. The subscriber resumes
+  after matching and may first receive a later number; it need not observe zero.
+- Optional extension outside the core schedule: start a second subscriber in
+  another prepared terminal:
   `python3 week01_ros/demo/subscriber.py --ros-args -r __node:=second_subscriber`.
   Both receive greetings; inspect the subscriber count before running `echo`.
 - Ask students to predict the result before each change. Stop all scripts with
   Ctrl+C when finished.
+
+## Questions and Recap (3 minutes)
+
+- Identify the node names, topic, type, publisher, and subscription.
+- Choose topic/service/action for sensor readings, an odometry reset, and navigation.
+- Explain `10` versus `1.0`, and why volatile durability prevents replay on restart.
+- Distinguish DDS discovery/delivery from executor callback scheduling, and ordinary
+  initialization/cleanup from managed lifecycle transitions.
 
 ## Troubleshooting
 
@@ -112,7 +155,12 @@ Spend about 5 minutes with the two scripts side by side:
 
 - [ ] Run both scripts and confirm matching message numbers.
 - [ ] Inspect node names, topic type, counts, and message data.
+- [ ] Verify verbose endpoint QoS; check counts before/during/after echo.
 - [ ] Stop and restart the subscriber and publisher separately.
 - [ ] Check Ctrl+C exits without a traceback.
-- [ ] Rehearse within 25 minutes: 5 minutes code, 8 minutes running and inspecting,
-      7 minutes experiments, and 5 minutes questions and wrap-up.
+- [ ] Rehearse within 20 minutes: 7 minutes code, 6 minutes running and inspecting,
+      4 minutes experiments, and 3 minutes questions and recap.
+
+Documentation and command syntax were checked against the scripts and official
+Jazzy sources. Live execution and timed rehearsal still need the Jazzy machine;
+the Windows editing workspace has neither the ROS CLI nor an installed WSL environment.

@@ -1,0 +1,129 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "ROS basics",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "What is ROS?",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "What is ROS used for?",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "ROS 1 → ROS 2",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Nodes and the ROS graph",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "Topics carry typed messages",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "Choose the right interface",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "One graph, multiple computers",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "ROS 2 architecture and DDS",
+                       "minutes":  4,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "QoS shapes delivery",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "Execution and lifecycle",
+                       "minutes":  3,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Inspect before debugging",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "Let\u0027s read it. Then run it.",
+                       "minutes":  20,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "DDS discovery and RTPS",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  15,
+                       "title":  "QoS compatibility",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Executors and concurrency",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Managed lifecycle transitions",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Migrating from ROS 1",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "timingMinutes":  45,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/subscriber.py":  "74F38AB4F89E601F36D98A71F1397E9B71F833D38CA76A584687E2FC7B9610C6",
+                           "TEACHING_NOTES.md":  "78FE3D5A33CAA17C4B9C3B88B7FAE953AFB4E59FB9D2AD1B65130CB420D2905D",
+                           "demo/README.md":  "8C422E7CDA46A2F961884D39106AF24736B9DB984989507D97B4999C5CB928B3",
+                           "PRESENTATION_PLAN.md":  "3145B67B4E2AF9D3D51677E8F655AF9E92B2083016921203E4301E357F2D57D0",
+                           "demo/publisher.py":  "5B10C600E9EF954234A282BA4E19409C6CF6C1498644F905730E2ADF0C1F8E29"
+                       },
+    "generated":  [
+                      "ROS_BASICS_UPDATED.pptx",
+                      "ROS_BASICS_UPDATED.pdf"
+                  ]
+}
