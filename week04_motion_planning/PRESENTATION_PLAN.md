@@ -1,86 +1,253 @@
-# Week 4 — Configuration Space and PRM Presentation Plan
+# Week 4 — Configuration Space and PRM
 
-## Slide 1 — A Reachable Goal Is Not Enough
+English, 16:9 deck: 22 slides, including five hidden backups. **20 minutes explanation + 25 minutes code/demo/questions.** Gazebo and ROS are not needed. Preserve demo files, demo README, and teaching notes. Minimal visible words, editable diagrams/equations, detailed speaker notes.
 
-- Week 3: IK gives a goal configuration. What happens along the motion to it?
-- Show two safe endpoints with a blocked direct motion.
-- Reserve 5 minutes for recap, 15 for concepts, and 25 for the demo and discussion.
+## Sequence and timing
 
-## Slide 2 — Workspace Versus Configuration Space
+| Deck slide | Content | Minutes |
+|---|---|---:|
+| 1 | Configuration space & PRM | 0 |
+| 2 | Why motion planning? | 1 |
+| 3 | Three kinds of planning | 2 |
+| 4 | Workspace versus configuration space | 2 |
+| 5 | Obstacles become invalid configurations | 1.5 |
+| 6 | Safe endpoints, blocked motion | 1.5 |
+| 7 | PRM: build, query, verify | 1 |
+| 8 | 1 · Sample configurations | 1.5 |
+| 9 | 2 · Keep free configurations | 1.5 |
+| 10 | 3 · Choose nearby candidates | 1 |
+| 11 | 4 · Validate local motions | 1.5 |
+| 12 | 5 · Store the roadmap | 1 |
+| 13 | 6 · Use an unsampled point | 1 |
+| 14 | 7 · Search the graph | 1 |
+| 15 | 8 · Verify the returned path | 1 |
+| 16 | Interpret success and failure | 1.5 |
+| 17 | Live demo: predict, build, animate | 25 |
+| 18 | Collision geometry (hidden) | 0 |
+| 19 | Topology and interpolation (hidden) | 0 |
+| 20 | PRM construction and queries (hidden) | 0 |
+| 21 | Dijkstra and useful tests (hidden) | 0 |
+| 22 | Sampling and completeness limits (hidden) | 0 |
 
-- Workspace: the physical arm and obstacles. Configuration space: `(q1,q2)`.
-- One point represents the entire arm, not only its tool (Introduction 15–20).
-- Our bounded joints use a square without edge wrapping; unrestricted revolute joints form `S¹ × S¹`.
+## Slide guidance, diagrams, implementation, and checks
 
-## Slide 3 — Which Configurations Are Free?
+### 1. Configuration space & PRM
 
-- Use FK to place both links, then check them against workspace obstacles.
-- Include link thickness and padding; contact counts as collision.
-- The plotted free-space background is a display approximation, not the planner's input.
+Timing: 0 min. Describe the whole robot. Find a collision-free route.
 
-## Slide 4 — Endpoints Are Not the Whole Path
+Untimed title. Week 4 learns configuration space and probabilistic roadmaps using the existing Python-only arm demo. Audience knows ROS, frames, simulation and planar FK/IK from Weeks 1–3. No ROS or Gazebo process is needed this week. Teaching slides total 20 minutes; demo is 25 minutes: 5 code, 12 reveal stages and animate, 8 sample-count comparison and checkpoint. Five hidden backups are untimed. Incorporate the former separate recap into motivation, not an additional five-minute block. All nine existing Week 4 files were read; preserve the teaching notes, README, four Python files and two overview PNGs. The separate MotionPlaningIntroPRM.pdf was not found in workspace/parent and was not reviewed; preserve its existing Oren Salzman references by section/printed number. Main diagram vertices are clearly labelled illustrative, not the seed-7 demo samples. Use saved actual overview for the demo transition and comparisons.
 
-- Interpolate between safe start and goal; show `(0,0)` colliding in between.
-- Validate intermediate configurations, with explicit resolution and padding.
-- Connect to the lecture's exact versus approximate local checking (PRM 17, 20).
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
 
-## Slide 5 — PRM in Four Steps
+### 2. Why motion planning?
 
-- Sample configurations, keep free ones, connect valid local paths, search the graph.
-- Vertices are configurations; edges are motions (PRM 4–5).
-- Show the pipeline diagram below.
+Timing: 1 min. A reachable goal does not guarantee a clear route.
 
-```mermaid
-flowchart LR
-    S[Sample angles] --> C[Reject collisions]
-    C --> N[Choose nearby configurations]
-    N --> E[Validate local paths]
-    E --> G[Reusable roadmap]
-    G --> Q[Attach start and goal]
-    Q --> D[Dijkstra search]
-    D --> P[Geometric path]
-```
+Visual: the same two-link arm in safe start, colliding intermediate pose and safe goal. Week 3 IK found a configuration for a desired tool point; it did not check how to move there. Motion planning seeks a continuous route through allowed configurations while respecting collision constraints along the way. Use exact start (−.7,.6), goal (.7,−.6) radians and their linear midpoint (0,0). The endpoints are free under the demo geometry, but the straight arm at the midpoint crosses the obstacle. This is a need for a detour, not evidence the goal is unreachable. Use the same lengths .6/.4 m; obstacle center (.8,0), radius .12. Pose diagrams use physical link thickness .03 m radius and the obstacle padding outline .01 m. Planning here is geometric in a static known scene, not dynamic control, acceleration limits or robust physical execution.
 
-## Slide 6 — Sampling Free Configurations
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
 
-- Uniform rejection sampling; accepted count differs from attempted count.
-- Fixed seeds make a demonstration reproducible (PRM 7–8).
-- A finite attempt budget avoids waiting indefinitely in a difficult scene.
+### 3. Three kinds of planning
 
-## Slide 7 — Nearby Does Not Mean Connected
+Timing: 2 min. Choose actions, search connections, and realize robot motion.
 
-- Euclidean distance between joint-angle pairs; k=10 candidate neighbors.
-- Each edge still needs a collision check; weight it by joint-space length.
-- Straight interpolation respects hard joint limits (PRM 14, 20).
+Visual: equal-sized task planning, graph search and motion planning cards, linked to one pick-and-place task. Task planning chooses actions and their order, e.g. approach, grasp and place with preconditions/effects. Graph search finds a route among specified vertices and edges under costs; a graph by itself does not know robot geometry. Motion planning finds continuous joint configurations connecting poses without collision in the full robot model. PRM builds a graph approximation in continuous configuration space, then uses graph search. These are complementary levels/tools, not mutually exclusive categories or a claim that every other planner is discrete. A symbolic task can be feasible abstractly but require geometric checking; a graph route can be invalid if its robot motions were never validated. Deeper task-and-motion planning integration belongs to Week 5. The main demo compares geometric paths, not pick/grasp symbolic operations.
 
-## Slide 8 — Construction Versus Query
+- https://arxiv.org/abs/2010.01083
+- https://www.cs.cmu.edu/~motionplanning/papers/sbp_papers/PRM/prmbasic_01.pdf
 
-- Build the roadmap once; attach the chosen endpoints for each query.
-- Dijkstra returns the shortest route in this graph (PRM 21).
-- That is not necessarily the globally shortest path, shortest tool motion, or fastest trajectory.
+### 4. Workspace versus configuration space
 
-## Slide 9 — What Can Go Wrong?
+Timing: 2 min. One point in configuration space represents the whole arm.
 
-- Uniform samples can miss narrow passages; sparse roadmaps can be disconnected.
-- “No path found in this roadmap” does not establish impossibility.
-- Probabilistic completeness is an asymptotic statement with assumptions; finite runs can fail (PRM 22–23).
-- Leave advanced sampling, neighbor data structures, and PRM* proofs for preparation reading.
+Visual: editable workspace arm at start (−.7,.6), connected to one highlighted point in a q1/q2 square. Workspace is the physical xy plane in metres, containing robot and circular obstacle. Configuration is q=(q1,q2) in radians; FK determines base, elbow and tip. The tool xy point alone does not specify the whole configuration: Week 3 showed two IK solutions can have the same tool position. This robot has two independent revolute joint coordinates, so its configuration space is two-dimensional even though every arm pose contains multiple points. q2 is relative to link1. Hard limits give C=[−π,π]² and opposite boundaries are not connected by wrapping. An unrestricted 2R model has a toroidal S1×S1 topology and needs a different metric/interpolator. Grid coloring is an approximate teaching display; geometric predicates decide free configurations. Briefly identify start/goal but delay revealing the demo's actual final route.
 
-## Slide 10 — Predict, Build, Animate
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
 
-- Preview both endpoints and the colliding midpoint before revealing the route.
-- Reveal samples → edges → searched path; animate workspace and configuration space together.
-- Compare 20 and 300 samples with the same seed; distinguish an observed improvement from a guarantee.
-- Label animation as kinematic playback, with no dynamics or physical execution guarantee.
+### 5. Obstacles become invalid configurations
 
-## Visuals Needed
+Timing: 1.5 min. Check the robot geometry, not only its end effector.
 
-- [Default overview](demo/overview.png) and [20-sample comparison](demo/overview_20.png).
-- Synchronized arm/configuration-space panels, with direct edge and planned detour.
-- Pipeline diagram from Slide 5 and a narrow-passage sketch for discussion.
+Visual: colliding straight arm at q=(0,0) and the corresponding point in the blocked configuration-space region. The physical obstacle is a circle centered (.80,0), radius .12 m. The whole arm can collide even if its tool is clear. Use FK to place both link segments and test each capsule of radius .03 m. Add .01 m padding; contact with the padded model is rejected. Define C_free as allowed configurations passing the geometry query, and C_obs as invalid ones under that model. Obstacle shapes in configuration space are generally not the same as their workspace shape: here a circle creates a coupled curved region in two angles. The displayed native grid is coarser than the demo display and explicitly approximate; the planner does not search that raster. The collision predicate, not a colored pixel, is the source of truth. Self-collision is intentionally outside this simplified model.
 
-## Live Demo Transition
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
 
-- Open `robot.py` and `planner.py`; map their functions to the four steps.
-- Run the [demo sequence](demo/README.md) and pause for predictions at each stage.
-- Close with: what is a configuration, what makes an edge valid, and what does search failure mean?
+### 6. Safe endpoints, blocked motion
+
+Timing: 1.5 min. A valid vertex does not make every outgoing motion valid.
+
+Visual: the straight start→goal segment through the blocked C-space region, endpoints in teal and midpoint in red. Linear local motion q(s)=(1−s)a+sb for s in [0,1]. Both endpoints are free, but s=.5 gives (0,0), which collides. edge_free tests configurations produced by interpolate, including endpoints. This motivates a separate edge predicate, not checking only vertices. For the demo, n=max(1,ceil(max(|b1−a1|,|b2−a2|)/.01)); evaluate i/n for i=0..n. Here max joint change is 1.4 rad, so n=140 and 141 configurations are checked if not short-circuited. This is sampled checking, not a general continuous collision detector. Padding adds geometric clearance but is not a guarantee for arbitrary resolution/model changes or physical robot operation. Right panel distinguishes free(a),free(b) from edge_free(a,b).
+
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 7. PRM: build, query, verify
+
+Timing: 1 min. The live demo will make these steps clearer.
+
+Visual: eight-step editable flow: sample, filter, neighbors, validate motions, store graph, attach query, search, verify. PRM stands for Probabilistic Roadmap. Construction builds a reusable graph of collision-free configurations and locally valid motions. Query attaches the actual start/goal, which need not be sampled vertices, and searches. Verification inspects the returned segments under the model; it does not create a physical execution guarantee. Main slides now unpack every step with Implement/Check cues; the live demo maps them to functions and reveals samples, edges and route separately. The demo prepares its computation at startup, so staged reveals are not incremental recomputation. Ordinary PRM is introduced; no claim of PRM* optimality or a completeness theorem for this exact fixed-k implementation. Use the original paper as background and the local source for implementation specifics.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- https://www.cs.cmu.edu/~motionplanning/papers/sbp_papers/PRM/prmbasic_01.pdf
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 8. 1 · Sample configurations
+
+Timing: 1.5 min. Draw joint-angle pairs inside the allowed configuration space.
+
+**Implement:** Seeded uniform angles; bounded attempts. **Check:** Limits, repeatability, attempt exhaustion.
+
+Visual: illustrative random candidates in C-space. Implement build_roadmap uses random.Random(seed), two uniform draws in [−π,π], and a rejection loop until the requested accepted count is reached. Defaults: 300 accepted samples, k=10, seed=7. Attempts include rejected candidates; 300 samples does not mean 300 random draws. Default max attempts=100*samples total, overridden by the Python max_attempts keyword. Exhaustion raises RuntimeError with the accepted count. A fixed seed makes the sample sequence reproducible, not elapsed timings. The actual seed-7 runs documented in README accepted 20 in 21 attempts and 300 in 312. The schematic slide samples use a separately labelled illustrative set rather than claiming to match Python's generator. Tests: finite two-angle values within limits, same seed/settings reproduce points, the 20-sample sequence is a prefix of 300, and mocked always-collision exhaustion terminates. Existing tests cover determinism/prefix and bounded failure.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 9. 2 · Keep free configurations
+
+Timing: 1.5 min. Forward kinematics supplies the geometry for collision checks.
+
+**Implement:** FK → both link capsules → clearance. **Check:** Either link, contact, and known poses.
+
+Visual: rejected straight configuration and the collision-clearance predicate. forward_points returns base=(0,0), elbow=(.6cosq1,.6sinq1), tip=elbow+(.4cos(q1+q2),.4sin(q1+q2)). segment_distance projects the obstacle center onto each segment, clamps projection to [0,1] and handles zero-length segments. clearance is the minimum segment-center distance minus obstacle radius and link radius. configuration_free requires clearance>PADDING; equality/contact fails. No need to explicitly construct every C-space obstacle boundary: use a predicate on queried configurations. Tests: actual start/goal free, zero collides; patch obstacles to hit link1 or link2; padded contact rejected; invalid length/nonfinite/out-of-limit q fails validation. Full derivation is in backup notes. This predicate models the full link geometry rather than checking only the tool.
+
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 10. 3 · Choose nearby candidates
+
+Timing: 1 min. Distance proposes a connection; geometry decides whether to keep it.
+
+**Implement:** Sort joint-space distance; exclude self. **Check:** Known ordering; fewer than k vertices.
+
+Visual: a highlighted configuration and candidate neighbor lines in an illustrative graph. nearest sorts (math.dist(q,p),index) tuples and takes the first k, excluding the requested self-index. Distance is Euclidean in this bounded angle-coordinate square, d=√((Δq1)²+(Δq2)²), with values in joint-space radians. Do not wrap opposite boundaries; do not use tool-space distance for this demo. Default k=10; a small roadmap can provide fewer candidates. Neighbor sets are not necessarily symmetric, but the construction considers the union: a pair is considered if either endpoint selects the other. A candidate line remains untrusted until edge_free. The schematic highlights four candidates for readability; the actual demo uses k=10. Checks: toy points with known distances/order, tie handling by index, self excluded, fewer than k returns available vertices. Changing sample count can change neighbors and edges even when sample points form a prefix. Candidate connections drawn dashed, not as already-valid edges.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 11. 4 · Validate local motions
+
+Timing: 1.5 min. Inspect configurations along the connection, including endpoints.
+
+**Implement:** Interpolate; check every sampled pose. **Check:** Blocked midpoint; endpoint inclusion.
+
+Visual: a candidate crossing the blocked region, interpolation dots that turn red at invalid poses. interpolate validates both endpoints and positive finite step. n=max(1,ceil(max coordinate change/step)), returned list includes n+1 configurations and each coordinate increment is at most 0.01 rad. edge_free short-circuits if any configuration fails. This linear motion stays within the convex hard-limit square but can cross obstacle regions. Padding is 0.01 m and physical link radius 0.03 m; both matter independently of angle-step units. Checks: free endpoints with colliding midpoint return False; endpoints included; coordinate increments bounded; a known clear segment passes; invalid steps rejected; no artificial wrapping from −3 to +3. Independent denser replay is useful to detect implementation errors, but no finite sampled test is a universal continuous-collision certificate. Do not claim a controller trajectory is produced.
+
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 12. 5 · Store the roadmap
+
+Timing: 1 min. Configurations become vertices; validated motions become edges.
+
+**Implement:** Undirected adjacency; length weights. **Check:** Symmetry, costs, no duplicate edges.
+
+Visual: a small editable roadmap with the edge-weight formula, with invalid candidate edges omitted. Roadmap holds points, adjacency, neighbors, attempts and build seconds. connect skips self-edges and existing edges, then runs edge_free. Only after success does it append both (a,b) and (b,a) with identical weight math.dist(q_a,q_b). Construction uses an examined set of sorted index pairs so a pair selected from either endpoint is checked once. Vertex denotes the entire arm; edge denotes the proposed local interpolation, not a free arbitrary shortcut between safe points. Check adjacency symmetry, positive/nonnegative appropriate weights, expected Euclidean values, no duplicates/self-edges, and each stored edge passing geometric validation. Reported edge_count=sum(degrees)//2 counts undirected preprocessing edges; query attachments are additional. Graph may have multiple connected components. Preprocessing can be reused only while model, obstacles and validity assumptions remain unchanged.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- https://www.cs.cmu.edu/~motionplanning/papers/sbp_papers/PRM/prmbasic_01.pdf
+
+### 13. 6 · Use an unsampled point
+
+Timing: 1 min. Add the actual start or goal; connect it without snapping.
+
+**Implement:** Validate endpoint; copy; add; connect. **Check:** Exact endpoint retained; original unchanged.
+
+Dedicated slide. Visual: an editable configuration-space roadmap with blue sampled vertices, orange q_new, dashed orange candidate connection, rejected red connection across C_obs and retained teal valid attachments. The illustrated q_new is the actual start (−0.7,0.6), absent from the illustrative vertex set. Unsampled means not already a sampled vertex, not outside the allowed angle bounds. First validate joint limits and collision status. query_roadmap copies points and each adjacency row, adds the actual start and goal to that query copy, selects their k nearest preprocessing vertices, checks each entire local motion via connect/edge_free, and stores only valid weighted connections. It also considers a checked direct start→goal edge. Never snap to a neighbor or assume the nearest edge is valid. Apply the procedure to both endpoints. Search from actual start index to actual goal index. Failure to attach or find a route is failure in this graph, not proof of no physical route. Tests: endpoint not in sample set retained exactly, original graph unchanged, invalid endpoint rejected, failed/disconnected attachment returns empty path/None length, free equal endpoints gives one point/zero length. Clicking the GUI only previews a pose; it does not run a new query. Show endpoint attachment through code without changing GUI behavior.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 14. 7 · Search the graph
+
+Timing: 1 min. Dijkstra finds a minimum-cost route among the validated edges.
+
+**Implement:** Heap frontier + costs + parent links. **Check:** Known shortest route; disconnected graph.
+
+Visual: an editable tiny graph with edge costs 1, 1, 5. The shortest 0→2 route is 0→1→2, cost 2, rather than direct cost 5; isolated vertex 3 is unreachable. shortest_path maintains a min-heap of tentative costs, skips stale entries, relaxes outgoing edges, records parent links and reconstructs the route when goal is removed at its minimum cost. Weights in the actual roadmap are nonnegative joint-space Euclidean lengths. Dijkstra does not decide whether a robot link collides: that was edge validation's responsibility. Shortest means shortest under these graph weights, not globally shortest in C_free, least tool travel distance or fastest motion. Tests use the exact small graph from test_demo.py, disconnected target and equal start/goal; compare returned indices and summed cost. A* is a later/course-homework alternative, not another planner to add here.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 15. 8 · Verify the returned path
+
+Timing: 1 min. Check endpoints, segments, and cost before interpreting playback.
+
+**Implement:** Replay segments; sum joint-space lengths. **Check:** Endpoints, clearance, and reported cost.
+
+Visual: highlighted valid illustrative detour in C-space; use the demo to show the corresponding arm poses. Verify exact first/last configurations, finite in-limit values, every polyline segment with edge_free, and sum of segment distances equal returned length. Independently denser sampling (0.002 rad in the existing test) and a separately formulated NumPy distance calculation check physical clearance of both links. This strengthens testing but remains sampled/model-dependent. demo playback is assembled using interpolate and follows the validated polyline; speed 0.7 joint-space rad/s is illustrative timing, not actuator/acceleration modeling. Synchronizing workspace arm and C-space marker reinforces one configuration=whole robot. GUI click pauses/resets playback and previews a configuration; it does not replan. The actual large-demo final path is reserved for the live demo transition to preserve predictions.
+
+- Demo source: demo/robot.py and demo/test_demo.py
+- Demo source: demo/planner.py and demo/test_demo.py
+- Demo source: demo/demo.py and demo/README.md
+
+### 16. Interpret success and failure
+
+Timing: 1.5 min. A finite roadmap can miss a route that physically exists.
+
+Visual: equal-size sparse/denser comparison cards with the actual README numbers. Uniform sampling can miss narrow passages; limited candidate connections can leave components disconnected. No path found in this roadmap means exactly that graph had no route, not impossibility of robot motion. For fixed seed 7 and k=10, documented 20 samples: 21 attempts, 91 construction edges, length ≈5.630 rad; 300: 312 attempts, 1,728 edges, length ≈5.243. Both find paths. This observed improvement is not guaranteed: a bigger sample set can change k-nearest neighbors, so edge sets are not necessarily nested and paths need not monotonically improve. A tiny 1-sample, 1-neighbor run can show failure. Probabilistic completeness is asymptotic under assumptions; assert no theorem for this exact fixed-k classroom implementation. PRM* asymptotic optimality is different and outside the timed core. Geometric path success does not validate dynamics, controllers or physical hardware.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Demo source: demo/demo.py and demo/README.md
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 17. Live demo: predict, build, animate
+
+Timing: 25 min. Watch one robot pose and one configuration-space point move together.
+
+5 minutes CODE: read robot.py and planner.py. Map forward_points/configuration_free to vertex validity, interpolate/edge_free to local motions, nearest/connect/build_roadmap to construction, query_roadmap to unsampled endpoints and graph copy, shortest_path to Dijkstra. Explicitly show start/goal are added as query vertices rather than snapping to samples.
+12 minutes STAGES/PLAYBACK: run python3 week04_motion_planning/demo/demo.py. Preview free start/goal and click (0,0) to display collision. Next stage reveals accepted samples, then checked edges, then search route. Computation was prepared at startup; this is staged disclosure. At final stage Play/Pause animates both panels. Click configuration space to preview and pause; it does not make a new planning query. Resume/replay starts the planned route at its start. Reset returns to first stage/start pose while retaining the roadmap.
+8 minutes COMPARISON/CHECKPOINT: run --compare or 20/300 samples with k=10, seed=7. Both documented default cases find a route, denser case shorter here, not a guarantee. Tiny roadmap can fail. Ask what a vertex/edge means, how a new endpoint is attached, whether free endpoints suffice, and what failure means. Playback is kinematic. Saved overview.png and overview_20.png are fallback exports; --export works headlessly. Demo requires Python 3.10+, NumPy, Matplotlib but no ROS/Gazebo. Existing README documents TA-machine validation; our Windows artifact checks are separate. The supplied professor PDF remains referenced but not newly reviewed.
+
+- Demo source: demo/demo.py and demo/README.md
+- Demo source: demo/planner.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 18. Collision geometry
+
+Timing: 0 min; optional hidden backup. Distance to a link segment becomes capsule clearance.
+
+Untimed backup. For obstacle center c and segment endpoints a,b, d=b−a. u=clamp(((c−a)·d)/(d·d),0,1); closest point h=a+ud; if d·d=0 use a. Distance=norm(c−h). For both links take minimum distance, subtract physical obstacle radius 0.12 and link capsule radius 0.03 to get clearance. Free iff clearance>.01 padding, equivalently minimum center distance>.16 m. Check contact inclusively as collision. For zero pose link2 lies from (0.6,0) to (1,0), contains obstacle projection (0.8,0), hence center distance 0 and clearance −0.15. Tip at (1,0) lies outside the physical obstacle but the link collides, demonstrating why tip-only checking fails. Physical obstacle outline plus padding is distinct from link radius; do not double-count the radius. Tests place obstacles against each link and test contact; zero-length segment branch should be unit checked separately. Self-collision unmodeled.
+
+- Demo source: demo/robot.py and demo/test_demo.py
+
+### 19. Topology and interpolation
+
+Timing: 0 min; optional hidden backup. The demo uses bounded angles; opposite square edges do not wrap.
+
+Untimed backup. Here q belongs to [−π,π]² with hard stops. Though ±π describe equivalent link orientations geometrically, the robot cannot cross that boundary by an infinitesimal wrap; interpolation follows the bounded joint coordinates. From (−3,0) to (3,0) the demo travels through 0 with joint-space length 6 rad. Unrestricted 2R has S1×S1 and shortest circular deltas; it needs an explicitly different metric and interpolation, not just connecting display edges. Full pose wraps are distinct from feasible motion under stops. Formula n=max(1,ceil(max(|Δq1|,|Δq2|)/h)); q_i=a+(i/n)(b−a),i=0..n,h=.01. Resolution is per-coordinate, not necessarily norm increment≤.01; Euclidean step can be √2 × 0.01. Grid display and edge samples serve different purposes; neither is an exact C_obs boundary nor general continuous collision guarantee.
+
+- Demo source: demo/robot.py and demo/test_demo.py
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+### 20. PRM construction and queries
+
+Timing: 0 min; optional hidden backup. Build once; attach actual endpoints to a query copy.
+
+Untimed backup. Construction pseudocode: while accepted<N and attempts<budget draw two uniform angles; accept if free. For each vertex consider k nearest others; deduplicate unordered pairs; retain connect only if edge_free. Store nonnegative length in both adjacency rows. Query: validate free start/goal; copy points and adjacency rows; if equal return [start], 0; append actual endpoints; attach each to k nearest preprocessing vertices with checked edges; consider checked direct edge; Dijkstra; map indices back to configurations. Roadmap metadata records neighbor count, attempts and build time; QueryResult stores path,length,message,query graph. Failure yields [], None, message; invalid inputs ValueError; sampling exhaustion RuntimeError. No mutation of original construction graph, no endpoint snapping. More queries reuse geometry-valid construction only in unchanged scene. The existing GUI supports pose preview, not interactive goal replanning; no new API/demo changes requested.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+
+### 21. Dijkstra and useful tests
+
+Timing: 0 min; optional hidden backup. Small known cases expose mistakes before a large demo.
+
+Untimed backup. Exact test graph adjacency: 0 connects 1 with weight 1 and 2 with weight 5; 1 connects 0 and 2 with weight 1; 2 connects 0 with weight 5 and 1 with weight 1; 3 is isolated. Expected shortest 0→2=[0,1,2], cost 2; 0→3=[], None. Test stale-heap handling, cost summation and parent reconstruction. For roadmap geometry check every vertex is free, adjacency symmetry, duplicate/self-exclusion, edge weight equals the norm and checked local motion. Query tests validate exact unsampled endpoint retention, query-copy immutability, disconnected/failed attachment, invalid endpoints, equal endpoints. Sampler deterministic/prefix and finite exhaustion tests; geometry both-link and contact tests; GUI stage/preview/play/pause/reset/arrival tests. Current eight test methods combine these existing checks; some proposed unit checks (nearest ordering, explicit graph storage) are guidance for students rather than claims of existing dedicated test methods. Independently dense path replay reduces risk of shared-predicate bugs. Source review and independent slide checks do not mean existing Python suite ran here; no local Python runtime installed.
+
+- Demo source: demo/planner.py and demo/test_demo.py
+- Demo source: demo/robot.py and demo/test_demo.py
+
+### 22. Sampling and completeness limits
+
+Timing: 0 min; optional hidden backup. Finite failure, probabilistic completeness, and optimality are different.
+
+Untimed backup. Uniform sample probability in a narrow free region is proportional to its measure; a finite sample budget can miss it. Candidate connection choices also matter. A roadmap may be disconnected even though C_free contains a feasible route. Appropriate sampling-based planners have probabilistic completeness results under stated hypotheses as samples grow; no such assertion for every fixed-k variant or this exact code. Completeness concerns finding a path, not least cost. Asymptotic optimality concerns convergence of costs and needs additional algorithms/connection rules, e.g. PRM*, outside this lesson. More accepted samples with the same seed are a point prefix in this demo, but k-neighbor graphs may replace connections and not remain nested. Finite no-route message must not be relabelled impossible. Discuss retrying seed/sample/k choices as possible experiments, not a universal guarantee. Physical applicability needs scene/model/dynamics/control validation beyond geometric sampled collision checking.
+
+- https://www.cs.cmu.edu/~motionplanning/papers/sbp_papers/PRM/prmbasic_01.pdf
+- Retained course reference: MotionPlaningIntroPRM.pdf, credited to Oren Salzman. Introduction 15–20; PRM 4–8, 14, 17, 20–23 (printed slide numbers within sections). Not found locally; not reviewed for this update.
+
+## Validation and limitations
+
+Read all nine original Week 4 files. The separate professor PDF was not found locally; its credited section and printed-slide references are retained, without claiming review. PowerPoint generation checks include all 22 slide renders, notes, five hidden states, reopen, 22 PDF pages, text bounds, and protected-file SHA256 hashes. Independent C# numerical checks validate geometry and illustrative attachments/path at 0.002 rad. Existing Python tests and GUI were read but cannot be run here because Python is unavailable; historical 20/300-sample results belong to the documented TA-machine validation. Current checks do not claim a new classroom rehearsal. Consult slides/validation.json and slides/README.md for exact evidence. Local collision validation is sampled; a denser replay is additional evidence, not a continuous safety proof. Self-collision is unmodeled and playback is kinematic.

@@ -1,0 +1,208 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Configuration space \u0026 PRM",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "Why motion planning?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "Three kinds of planning",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "Workspace versus configuration space",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Obstacles become invalid configurations",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "Safe endpoints, blocked motion",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "PRM: build, query, verify",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "1 · Sample configurations",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "2 · Keep free configurations",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "3 · Choose nearby candidates",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "4 · Validate local motions",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "5 · Store the roadmap",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "6 · Use an unsampled point",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "7 · Search the graph",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "8 · Verify the returned path",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Interpret success and failure",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Live demo: predict, build, animate",
+                       "minutes":  25,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Collision geometry",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  19,
+                       "title":  "Topology and interpolation",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  20,
+                       "title":  "PRM construction and queries",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  21,
+                       "title":  "Dijkstra and useful tests",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Sampling and completeness limits",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "timingMinutes":  45,
+    "explanationMinutes":  20,
+    "demoMinutes":  25,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/overview.png":  "3033A50DED1505C9613E6E52EEB3E9DE8FB48F8B3AA129B0C33548E960441A70",
+                           "demo/planner.py":  "4378204178AB5B4DA2F802484E380961360A5D3F0EF85A81DB8149C8018C6D6C",
+                           "demo/README.md":  "8E831A0DCFBA0DA2E5487BEBA0660DD05042EB6453FECEA87F0552B56132D0AF",
+                           "TEACHING_NOTES.md":  "B8B0E84C2D6EA070C6DE9B4839896A8717FE9CDE67339E1BAFF8E20C405004DB",
+                           "demo/demo.py":  "759FAB719673BA3824B812CFA629FE607235D4B2F37F2658CDFC04B60AD23759",
+                           "demo/robot.py":  "38AF2D6E654AB6DD144B0AF4C51DD877C2BFCBA932AE259A22CDBF41FFB55BC6",
+                           "demo/test_demo.py":  "E1872426EC19FFDC0B9EFD97E47414D2624C8C3C7352461062AA0EB38A82F453",
+                           "demo/overview_20.png":  "65B3966B3DCF47CE4D906D057ECEAACD05A1D2942494F53141B0B311736D9F5D"
+                       },
+    "numericChecks":  [
+                          "Exact start and goal are free",
+                          "Safe endpoints but colliding midpoint/local motion",
+                          "FK agrees with Week 3",
+                          "Padded contact distance is 0.12+0.03+0.01 m",
+                          "Midpoint collision is with link 2, not link 1",
+                          "141 local-validation samples include both endpoints",
+                          "Per-joint increment \u003c=0.01 rad",
+                          "Limits and no boundary wrapping",
+                          "Illustrative vertices are valid; actual start is unsampled",
+                          "Illustrative query retains exact endpoints and finds route",
+                          "Illustrative path passes denser 0.002-rad replay",
+                          "Nearest ordering, self exclusion, fewer-than-k handling",
+                          "Disconnected graph returns no route"
+                      ],
+    "sourceChecks":  [
+                         "Query copies reusable points and adjacency rows",
+                         "Exact endpoints appended to query graph",
+                         "Attachments select k nearest preprocessing points",
+                         "Direct query edge is checked through connect",
+                         "Equal endpoints return one point and zero length",
+                         "Configuration predicate rejects padded contact",
+                         "Stored edges have matching reverse weights",
+                         "Existing tests cover immutable query and deterministic prefix",
+                         "Existing tests cover invalid, failed and equal queries"
+                     ],
+    "illustrativePath":  [
+                             [
+                                 -0.7,
+                                 0.6
+                             ],
+                             [
+                                 -1.8,
+                                 1.9
+                             ],
+                             [
+                                 -0.5,
+                                 1.9
+                             ],
+                             [
+                                 0.4,
+                                 1.2
+                             ],
+                             [
+                                 0.7,
+                                 -0.6
+                             ]
+                         ],
+    "pythonSuiteRun":  false,
+    "pythonLimitation":  "No installed Python; existing tests read, not executed.",
+    "generated":  [
+                      "CONFIGURATION_SPACE_AND_PRM.pptx",
+                      "CONFIGURATION_SPACE_AND_PRM.pdf"
+                  ]
+}
