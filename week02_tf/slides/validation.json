@@ -1,0 +1,180 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Coordinate frames \u0026 tf2",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "Why do coordinates need a frame?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "What are TF and tf2?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "Always check the conventions",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Read the direction correctly",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "Matrix representation",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "Compose and invert",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "Euler angles: order matters",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "Quaternion representation",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "Rotate with a quaternion",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "One example, three representations",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "The frame tree",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "How tf2 works",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Transform at the measurement time",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Inspect and predict",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Live demo: read, run, predict",
+                       "minutes":  25,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Expanded Euler rotation matrix",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Recover Euler angles",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  19,
+                       "title":  "Quaternion → rotation matrix",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  20,
+                       "title":  "Stable matrix → quaternion",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  21,
+                       "title":  "Roll–pitch–yaw → quaternion",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Quaternion algebra",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  23,
+                       "title":  "Conventions change the formula",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  24,
+                       "title":  "ROS axes and common frames",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  25,
+                       "title":  "Interpolate time and orientation",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Worked mathematical checks",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "timingMinutes":  45,
+    "explanationMinutes":  20,
+    "demoMinutes":  25,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/README.md":  "206272990E9A7348120BA2BDFD71CAD6B69D1884C5E365C6034EC67B83904BD0",
+                           "TEACHING_NOTES.md":  "5BE0C18DC6EDEE0701376024D4E5C5BD56C94AB2BE2B9DA9C4793681931EAD7D",
+                           "demo/frames.rviz":  "0617E5CEA94F58AE2D026C37855896403D72FCAA35609DC3DB96103130F926B4",
+                           "demo/static_frames.py":  "9AFB432C74EE18B39E481C8EF05A5493E4C9EFB604934D730DCE1A2F1A93C690",
+                           "demo/moving_base.py":  "A84797B3439B1DD9B18BD034293ABA12B40E1541847B6AEFD9AD10B7713E8036",
+                           "demo/transform_point.py":  "A620A26092352237A2E2F1B886AE6E8FEBE7A0C93CB036D424F7D64AD4E548D7"
+                       },
+    "generated":  [
+                      "TF_COORDINATE_TRANSFORMS.pptx",
+                      "TF_COORDINATE_TRANSFORMS.pdf"
+                  ]
+}
