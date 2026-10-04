@@ -1,0 +1,22 @@
+﻿{
+    "numerical":  {
+                      "status":  "PASS",
+                      "checks":  165,
+                      "worstAbsoluteError":  7.8772210976296719E-11,
+                      "positiveBranch":  [
+                                             0,
+                                             1.5707963267948966
+                                         ],
+                      "negativeBranch":  [
+                                             1.1760052070951352,
+                                             -1.5707963267948966
+                                         ],
+                      "position":  [
+                                       0.6,
+                                       0.4
+                                   ],
+                      "existingPythonUnitTests":  "Not executed here; no local Python/ROS runtime. These are independent slide-math checks."
+                  },
+    "modelAndConfigurationChecks":  13,
+    "status":  "PASS"
+}
