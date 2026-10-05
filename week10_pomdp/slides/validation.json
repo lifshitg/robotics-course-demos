@@ -1,0 +1,318 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "POMDPs: beliefs and decisions",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "What changes from an MDP?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "State versus observation",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "The POMDP model",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Fix the observation timing",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "Why history matters",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "What is a belief?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "Belief space",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "Example A: move, then observe",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "Prediction by total probability",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "Prediction in matrix form",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Read the observation model",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "Derive the Bayesian correction",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Why normalize?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Red observation: complete calculation",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Your turn: the blue alternative",
+                       "minutes":  4,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Blue observation: answer and interpretation",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "The complete belief update",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  19,
+                       "title":  "Check your update",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  20,
+                       "title":  "An MDP over beliefs",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  21,
+                       "title":  "Policies and rewards over beliefs",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Bellman planning over beliefs",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  23,
+                       "title":  "Example B: reset the problem",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  24,
+                       "title":  "Immediate commitment",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  25,
+                       "title":  "Sense and update",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Calculate the value of information",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  27,
+                       "title":  "When sensing is too expensive",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  28,
+                       "title":  "A contingent policy tree",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  29,
+                       "title":  "What does an alpha-vector store?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  30,
+                       "title":  "The commitment upper envelope",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  31,
+                       "title":  "The sensing tree also has a vector",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  32,
+                       "title":  "Why planning remains difficult",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  33,
+                       "title":  "Questions \u0026 recap",
+                       "minutes":  3,
+                       "backup":  false
+                   },
+                   {
+                       "number":  34,
+                       "title":  "Full conditioning and impossible evidence",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  35,
+                       "title":  "Matrix conventions and posterior odds",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  36,
+                       "title":  "General priors and sensing regions",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  37,
+                       "title":  "Policy-tree alpha-vector recursion",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  38,
+                       "title":  "A map of solution approaches",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "totalMinutes":  45,
+    "presentationMinutes":  38,
+    "exerciseMinutes":  4,
+    "recapMinutes":  3,
+    "softwareDemoMinutes":  0,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "visuals\\commitment_values.svg":  "52A1BF8F3A23CBFF6FBAB61A3F1D56DD9C110AB583C137B106465CD94DAF7248",
+                           "demo\\README.md":  "EE0D073FE548F3B88ACDCE548DD54420C9855DCC15A3895CA01F311CF9F36F1F",
+                           "TEACHING_NOTES.md":  "85BED8A608119DF0EB255EB80DD3266ECBC526E531610756B9E6AC938AD5717E"
+                       },
+    "independentContentChecks":  [
+                                     "Transition row 0 sums to one",
+                                     "Sensor row 0 sums to one",
+                                     "Transition row 1 sums to one",
+                                     "Sensor row 1 sums to one",
+                                     "Predicted L",
+                                     "Predicted R",
+                                     "Red L weight",
+                                     "Red R weight",
+                                     "Red probability",
+                                     "Red L posterior",
+                                     "Red R posterior",
+                                     "Blue L weight",
+                                     "Blue R weight",
+                                     "Blue probability",
+                                     "Blue L posterior",
+                                     "Blue R posterior",
+                                     "Observation probabilities sum to one",
+                                     "Expected posterior recovers prediction 0",
+                                     "Expected posterior recovers prediction 1",
+                                     "Identity transition retains prior",
+                                     "Zero-likelihood observation probability",
+                                     "Impossible observation is undefined; no uniform fallback",
+                                     "Uninformative sensor retains prediction",
+                                     "Example B red probability",
+                                     "Example B blue probability",
+                                     "Example B red posterior",
+                                     "Example B blue posterior",
+                                     "Conditional red commitment reward",
+                                     "Conditional blue commitment reward",
+                                     "Sensing value",
+                                     "Correct commitment probability",
+                                     "Independent sensing value cross-check",
+                                     "Cost-seven tie",
+                                     "Cost-eight rejection",
+                                     "Sensing alpha L",
+                                     "Sensing alpha R",
+                                     "Sensing alpha uniform dot product",
+                                     "Commitment lines intersect",
+                                     "Left sensing intersection",
+                                     "Right sensing intersection",
+                                     "Red posterior action threshold",
+                                     "Blue posterior action threshold",
+                                     "Red posterior odds",
+                                     "Blue posterior odds",
+                                     "101-prior Bayes decision values agree with all four post-sense trees",
+                                     "101-prior full sense-once problem agrees with three-line plotted envelope",
+                                     "21-prior prediction/normalization/expected-posterior checks pass",
+                                     "38 slides; five hidden backups; exercise precedes answer",
+                                     "Explanation minutes",
+                                     "Exercise minutes",
+                                     "Recap minutes"
+                                 ],
+    "sourceChecks":  [
+                         "TEACHING_NOTES.md / | L | 0.8 | 0.2 |",
+                         "TEACHING_NOTES.md / | R | 0.1 | 0.9 |",
+                         "TEACHING_NOTES.md / | L | 0.9 | 0.1 |",
+                         "TEACHING_NOTES.md / | R | 0.2 | 0.8 |",
+                         "TEACHING_NOTES.md / 0.829787",
+                         "TEACHING_NOTES.md / 0.119266",
+                         "TEACHING_NOTES.md / 7−c",
+                         "TEACHING_NOTES.md / Class18-POMDPs.pdf",
+                         "demo/README.md / software commands",
+                         "demo/README.md / blue alternative from the same prediction",
+                         "visuals/commitment_values.svg / Commit L: 20p",
+                         "visuals/commitment_values.svg / Commit R: 10",
+                         "visuals/commitment_values.svg / Best immediate commitment"
+                     ],
+    "professorPdfReviewed":  false,
+    "powerPointRendered":  true,
+    "powerPointReopened":  true
+}
