@@ -1,0 +1,59 @@
+{
+  "mode": "slam",
+  "seed": 7,
+  "sensor_sigma": 0.15,
+  "motions": 32,
+  "robot_estimate": [
+    1.616831271038672,
+    2.2084362649782188
+  ],
+  "robot_error_m": 0.5840544837944774,
+  "weight_sum": 1.0000000000000004,
+  "python": "3.13.5",
+  "numpy": "2.2.6",
+  "matplotlib": "3.10.8",
+  "correction_median_seconds": 0.46421299999929033,
+  "correction_max_seconds": 0.49783070001285523,
+  "snapshot_render_seconds": [
+    0.29341400001430884,
+    0.2848758999898564,
+    0.28264170000329614
+  ],
+  "stage_median_seconds": {
+    "Prediction": 8.47000046633184e-05,
+    "Weighting": 0.46421299999929033,
+    "Resampling": 0.039362299983622506
+  },
+  "stage_max_seconds": {
+    "Prediction": 0.00015750000602565706,
+    "Weighting": 0.49783070001285523,
+    "Resampling": 0.04201400000602007
+  },
+  "landmark_means": [
+    [
+      -0.5832456432780728,
+      -0.02730895316643647
+    ],
+    [
+      5.929950668129221,
+      -0.22742451801996555
+    ],
+    [
+      -0.5381771999781724,
+      5.297597972393512
+    ]
+  ],
+  "landmark_errors_m": [
+    0.5838846284377587,
+    0.23796810772066948,
+    0.8848747408317469
+  ],
+  "conditional_map_sum_min": 0.9999999999999996,
+  "conditional_map_sum_max": 1.0000000000000004,
+  "marginal_sums": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "all_finite": true
+}

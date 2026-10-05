@@ -1,0 +1,8 @@
+{
+  "backend": "TkAgg",
+  "startup": true,
+  "controls": true,
+  "shutdown": true,
+  "hidden_window": true,
+  "human_classroom_rehearsal": false
+}

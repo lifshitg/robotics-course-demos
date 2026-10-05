@@ -1,0 +1,17 @@
+test_controls (test_demo.FilterTests.test_controls) ... ok
+test_measurement_and_no_position_change (test_demo.FilterTests.test_measurement_and_no_position_change) ... ok
+test_prediction_and_resampling (test_demo.FilterTests.test_prediction_and_resampling) ... ok
+test_scenario_reproducibility (test_demo.FilterTests.test_scenario_reproducibility) ... ok
+test_worked_weights (test_demo.FilterTests.test_worked_weights) ... ok
+test_circular_first_range_and_multiple_views (test_slam.SLAMTests.test_circular_first_range_and_multiple_views) ... ok
+test_controls_truth_and_reset_isolation (test_slam.SLAMTests.test_controls_truth_and_reset_isolation) ... ok
+test_enumerated_bayes_and_old_map_evidence (test_slam.SLAMTests.test_enumerated_bayes_and_old_map_evidence) ... ok
+test_full_runs_normalization_and_physical_comparability (test_slam.SLAMTests.test_full_runs_normalization_and_physical_comparability) ... ok
+test_prediction_and_invalid_inputs (test_slam.SLAMTests.test_prediction_and_invalid_inputs) ... ok
+test_resampling_copies_maps_without_aliases (test_slam.SLAMTests.test_resampling_copies_maps_without_aliases) ... ok
+test_unknown_map_prior_and_truth_independence (test_slam.SLAMTests.test_unknown_map_prior_and_truth_independence) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 42.158s
+
+OK

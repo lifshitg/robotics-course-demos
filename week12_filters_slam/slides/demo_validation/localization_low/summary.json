@@ -1,0 +1,28 @@
+{
+  "mode": "localization",
+  "seed": 7,
+  "sensor_sigma": 0.15,
+  "motions": 32,
+  "robot_estimate": [
+    1.7460305065831132,
+    2.6043573278559995
+  ],
+  "robot_error_m": 0.17095322666738544,
+  "weight_sum": 1.0000000000000004,
+  "python": "3.13.5",
+  "numpy": "2.2.6",
+  "matplotlib": "3.10.8",
+  "correction_median_seconds": 7.050001295283437e-05,
+  "correction_max_seconds": 0.00014009998994879425,
+  "snapshot_render_seconds": [],
+  "stage_median_seconds": {
+    "Prediction": 1.9400002202019095e-05,
+    "Weighting": 7.050001295283437e-05,
+    "Resampling": 2.300000051036477e-05
+  },
+  "stage_max_seconds": {
+    "Prediction": 5.8900011936202645e-05,
+    "Weighting": 0.00014009998994879425,
+    "Resampling": 7.959999493323267e-05
+  }
+}

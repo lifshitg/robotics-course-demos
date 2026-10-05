@@ -1,0 +1,12 @@
+{
+  "tests_run": 12,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "elapsed_seconds": 42.158414600009564,
+  "python": "3.13.5",
+  "numpy": "2.2.6",
+  "matplotlib": "3.10.8",
+  "pinned_environment": false,
+  "interactive_classroom_rehearsal": false
+}
