@@ -4,15 +4,37 @@ Select **Localization: known map** or **SLAM: unknown map** in the same visualiz
 
 ## Launch
 
-The pinned requirements support Python 3.10–3.12. Activate your course environment, then run from the repository root:
+On your Linux computer, open a terminal at the repository root. The existing `.venv` has Python 3.12.3, NumPy 1.26.4 and Matplotlib 3.10.8, so you can launch directly:
 
-```powershell
-python -m pip install -r week12_filters_slam/demo/requirements.txt
+```bash
+cd /home/gilad/robotics-course/robotics-course-demos
+source .venv/bin/activate
 python week12_filters_slam/demo/visualize.py
+```
+
+To start directly in SLAM mode, run from that same terminal:
+
+```bash
 python week12_filters_slam/demo/visualize.py --mode slam
 ```
 
-An interactive Matplotlib desktop backend is required for the window. No ROS or robotics simulator is needed. For a Windows virtual environment, create it with `python -m venv .venv` and activate `.venv\Scripts\Activate.ps1`. Current local checks used an existing Python 3.13.5 / NumPy 2.2.6 environment; this is separate from validation of the unchanged NumPy 1.26.4 pin.
+An interactive Matplotlib desktop backend is required for the window. If no window opens or Matplotlib selects the noninteractive `Agg` backend, try:
+
+```bash
+MPLBACKEND=TkAgg python week12_filters_slam/demo/visualize.py --mode slam
+```
+
+This requires Tk support and a desktop display; run it in your local desktop terminal. No ROS or robotics simulator is needed.
+
+For a fresh setup, the pinned requirements support Python 3.10–3.12. From the repository root, create and activate an environment, then install the dependencies:
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r week12_filters_slam/demo/requirements.txt
+```
+
+On Windows, use `python -m venv .venv` with a supported Python version and activate with `.venv\Scripts\Activate.ps1`; the installation and launch commands above then use the same repository-relative paths. Historical SLAM validation used Python 3.13.5 / NumPy 2.2.6; that is separate from the pinned environment and the local dependency check above.
 
 ## Controls
 
@@ -33,6 +55,24 @@ Robot dots are hypotheses, not physical robots. Size/color show robot weights; t
 In SLAM, gray squares show teaching-only true landmark locations. Blue/green/purple contours show landmark marginal probability regions (approximately 50% and 90% highest-density regions). Diamonds show posterior means. A mean can lie between modes or inside a ring where probability is low; inspect the full heatmap rather than treating a diamond as a unique solution. Heatmap brightness is scaled independently for each display; compare shapes, not absolute brightness across frames.
 
 Before observations, landmark priors are uniform. One range produces a circular band conditional on a robot position. Measurements from additional viewpoints narrow the possibilities; collinear viewpoints can preserve ambiguity. In the seeded run, motion 8 illustrates ambiguity and motions 16/32 show later refinement. Estimated landmarks need not coincide exactly with the truth overlay.
+
+## Why the SLAM result has several clumps
+
+There are four estimated objects: one robot and three landmarks. Yellow/green dots describe the robot belief; blue, green and purple contours describe L1, L2 and L3. Within each object's belief, the default low-noise run can also show several separate clumps. Those are alternative hypotheses, not extra robots or landmarks. The algorithm does not impose a count of four clumps.
+
+Range-only observations constrain distances, not directions. A first observation leaves a ring of possible landmark positions; observations along a straight path can leave alternatives on opposite sides of that path. Turning gives additional information, but the robot trajectory is itself uncertain.
+
+Robot and map uncertainty are coupled: shifting a whole candidate robot trajectory and all its landmarks by the same amount preserves their relative distances. The initial robot prior and finite map bounds constrain this freedom, but there is no exact known robot pose or landmark coordinate to fix the map's absolute position. Several robot/map explanations can therefore remain plausible. Corresponding clumps across the robot and landmark displays can reflect these different joint explanations; the separate plots do not show their correlations directly.
+
+The finite particle approximation also affects the shape. Resampling duplicates successful robot hypotheses together with their maps and discards others. Repeating this with only 500 particles can leave a few dominant families; later motion noise spreads their robot descendants into clumps. The 0.125 m map grid and narrow likelihoods can make landmark probability islands look sharp. The exact number and prominence of clumps depend on seed, noise and stage; they are not a guarantee of four equally valid geometric solutions. The red robot X and landmark diamonds are averages, so they can fall between clumps where little probability lies.
+
+A local ancestry trace of the default seed-7, 0.15 m run found only eight initial particle ancestors still represented after motion 32. The four largest families contained 227, 156, 64 and 22 descendants: together 469 of the 500 particles. This supports the explanation of a few dominant robot/map families. An ancestral family is not necessarily one visible clump, since descendants acquire different motion noise and map updates.
+
+## Are L1–L3 particles or heatmaps?
+
+The robot is represented by **500 weighted particles**. Each robot particle carries **three separate 81×81 probability grids**, one per landmark, conditional on that particle's robot trajectory. Landmark locations are not sampled as a separate cloud of particles in this implementation. These grids are the estimator's stored beliefs, not just a display effect.
+
+The L1/L2/L3 selector shows the corresponding **marginal distribution**: for each grid cell, sum that landmark's conditional probability across robot particles, weighted by their robot weights. The colored contours on the main plot show the same marginal distributions. Bright heatmap cells are more plausible landmark locations; diamonds are their means. Selecting L1/L2/L3 only changes the displayed landmark. Resampling copies a selected robot particle and all three of its conditional grids together, preserving the robot/map relationship.
 
 ## What each estimator knows
 
@@ -65,7 +105,7 @@ In SLAM, reset; step through the first observation and inspect each landmark hea
 
 ## Headless export and tests
 
-```powershell
+```bash
 python week12_filters_slam/demo/visualize.py --headless --output week12_filters_slam/slides/demo_validation/localization_low
 python week12_filters_slam/demo/visualize.py --headless --sigma 0.6 --output week12_filters_slam/slides/demo_validation/localization_high
 python week12_filters_slam/demo/visualize.py --headless --mode slam --output week12_filters_slam/demo/figures/slam_low
