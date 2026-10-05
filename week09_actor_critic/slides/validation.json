@@ -1,0 +1,277 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Policy gradients \u0026 actor–critic",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "Why tables become impractical",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "Learn the policy directly",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "Our balancing task",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "A stochastic continuous policy",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "What are we optimizing?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "Where the policy gradient comes from",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "Reward-to-go and the gradient estimate",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "REINFORCE intuition",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "Why plain returns are noisy",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "The baseline idea",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Baseline worked example",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "Advantage: better than expected",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Learn the baseline: introduce the critic",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Actor–critic and the TD estimate",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Calculate one update signal",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Our five-step return target",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Two losses, two learning roles",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  19,
+                       "title":  "The A2C training loop",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  20,
+                       "title":  "Exploration versus evaluation",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  21,
+                       "title":  "PPO: discourage excessive policy changes",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  22,
+                       "title":  "SAC: reward plus entropy",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  23,
+                       "title":  "What the demonstration establishes",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  24,
+                       "title":  "Watch rewards become a balancing policy",
+                       "minutes":  10,
+                       "backup":  false
+                   },
+                   {
+                       "number":  25,
+                       "title":  "Questions \u0026 recap",
+                       "minutes":  5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Expanded trajectory-gradient derivation",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  27,
+                       "title":  "Baseline cancellation \u0026 Gaussian gradient",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  28,
+                       "title":  "Multi-step targets and episode boundaries",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  29,
+                       "title":  "Bounded density and gradient separation",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  30,
+                       "title":  "A2C, PPO, and SAC in context",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "totalMinutes":  45,
+    "presentationMinutes":  30,
+    "demoMinutes":  10,
+    "recapMinutes":  5,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo\\classroom\\comparison.png":  "3A738946D7BE745C2DB6E67A26C8D03ACE16501FFF43A49ED48F87960579288B",
+                           "demo\\README.md":  "C664B75E8B07EB3D19F4B971288E4D6F74972F1C7C2615EB5D57C5BD7B18827A",
+                           "demo\\.gitignore":  "CA16118E466AA754597FE0E31641EF5A9690185461CAFEBB24577F023D618BD7",
+                           "demo\\compare.py":  "7F056C5FB450EDAD7BDC6A45A2456EAA279B8ED503688CF27B05C4B48C6214DA",
+                           "demo\\classroom\\training.png":  "EEC6770B52A30CEBBDFDD01F2C7670E9F01B27F109760393DC6696DDB03E5EF5",
+                           "demo\\classroom\\initial.pt":  "3C8F14628815AE72CF36C68FA52C136D5BBDF5F162AB43BB3AF426CDA031F589",
+                           "demo\\train.py":  "DB91642FBB69106DF6FB60EA893815568D60C7B66BCA0A267B0244CA9AEC9DD2",
+                           "demo\\classroom\\settings.json":  "111FD62A8526EADA195B00EABF78B549F81DB947CDF61DD46345E8330A5E1CEA",
+                           "demo\\classroom\\trained.pt":  "E1641AD779579FBCF034F69AF8601D19CB3B60A8C600D383840C5EA1949EF253",
+                           "demo\\evaluate.py":  "7145D7552A142BCBAB0375F5826ECFB4F9D95226EB51B5473D5C0F109431423E",
+                           "demo\\requirements.txt":  "2C4A6458A36D9C2E21562ED28FF238F8F2E772D3AE1A4C3BB7C169E13D7CA28F",
+                           "demo\\watch.py":  "E44005912AA895CFACFF9E6A4010E9AC2C35313C5227545E974C64C3B6E3A95E",
+                           "demo\\classroom\\results.json":  "5B2942D75B25EE4324AF7CBD837555733CEA116E5458F99A85CF2FBD5ACDD49D",
+                           "TEACHING_NOTES.md":  "B5B471776F247A1F197D7AFE72FBE4A2E81D52A6532942086F09C37A3090FD33",
+                           "demo\\networks.py":  "6A540B5B77DD694D93E8A1B6442653863886F90183596768F02348D89E01641E",
+                           "demo\\test_demo.py":  "32C9AEFAD18716B279DC59C97750F93C083C21A8DF8B71650BE9E636EEBD7CEF",
+                           "demo\\algorithm.py":  "AE7E132A3B929E12863C4B0789175D1DCA618FEE639B13B37C2C6DD0622C961F"
+                       },
+    "independentContentChecks":  [
+                                     "Illustrative table entries",
+                                     "One-step target",
+                                     "Estimated advantage",
+                                     "Critic squared error",
+                                     "Centered positive return",
+                                     "Centered negative return",
+                                     "Expected baseline score is zero",
+                                     "Expected uncentered gradient",
+                                     "Expected centered gradient unchanged",
+                                     "Three-step target with bootstrap",
+                                     "Five-step healthy target with tail 2",
+                                     "Termination example ignores tail",
+                                     "Truncation example retains final value",
+                                     "Illustrative Gaussian mean step",
+                                     "PPO positive-advantage clipping",
+                                     "PPO negative-advantage clipping",
+                                     "Rollout transition count",
+                                     "Both actual excerpts match source after whitespace normalization",
+                                     "Collector evaluates final observation before reset",
+                                     "Evaluation source uses deterministic actions and separate environment; no training update",
+                                     "Historical seed 7 initial length",
+                                     "Historical seed 7 trained length",
+                                     "Historical seed 7 checkpoint",
+                                     "Historical seed 7 cap count",
+                                     "Historical seed 0 initial length",
+                                     "Historical seed 0 trained length",
+                                     "Historical seed 0 checkpoint",
+                                     "Historical seed 0 cap count",
+                                     "Historical seed 1 initial length",
+                                     "Historical seed 1 trained length",
+                                     "Historical seed 1 checkpoint",
+                                     "Historical seed 1 cap count",
+                                     "30 slides; five hidden backups",
+                                     "22 teaching slides sum to 30 minutes",
+                                     "Teaching slide 4 is conceptual; bounding equation is confined to backup content"
+                                 ],
+    "sourceChecks":  [
+                         "algorithm.py / GAMMA=.99",
+                         "algorithm.py / ENV_ID=\u0027InvertedPendulum-v5\u0027",
+                         "algorithm.py / def __init__(self,seed,count=8)",
+                         "algorithm.py / def collect(self,model,steps=5)",
+                         "algorithm.py / continuation=torch.where(truncated[t],next_values[t].detach(),tail)",
+                         "algorithm.py / continuation=torch.where(terminated[t],torch.zeros_like(continuation),continuation)",
+                         "algorithm.py / advantage=targets.detach()-values",
+                         "algorithm.py / actor_loss=-(model.log_probability(obs,latent.detach())*advantage.detach()).mean()",
+                         "algorithm.py / critic_loss=(values-targets.detach()).square().mean()",
+                         "algorithm.py / a=model.deterministic(x)[0].numpy()",
+                         "networks.py / nn.Linear(4,64),nn.Tanh(),nn.Linear(64,64)",
+                         "networks.py / self.distribution(obs).sample()",
+                         "networks.py / return 3*latent.tanh(), latent",
+                         "networks.py / return 3*self.actor(obs).tanh()",
+                         "networks.py / log_jacobian = math.log(3.) + 2*(math.log(2.)-latent-F.softplus(-2*latent))",
+                         "train.py / loss=al+.5*cl",
+                         "train.py / torch.optim.RMSprop(model.parameters(),lr=7e-4",
+                         "train.py / torch.nn.utils.clip_grad_norm_(model.parameters(),.5)",
+                         "train.py / def train(output,seed=7,steps=250000)",
+                         "train.py / entropy_bonus=0"
+                     ],
+    "pythonSuiteRun":  false,
+    "checkpointEvaluationRun":  false,
+    "pythonLimitation":  "No installed Python. Independent PowerShell arithmetic and source checks do not execute the learner.",
+    "professorPdfReviewed":  false,
+    "powerPointRendered":  true,
+    "powerPointReopened":  true
+}
