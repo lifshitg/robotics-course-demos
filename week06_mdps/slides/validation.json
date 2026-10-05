@@ -1,0 +1,257 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Markov decision processes",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "From plans to policies",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "Our delivery robot",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "Define every part of the MDP",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Read transition probabilities",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "What makes a state Markov?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "A policy chooses actions",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "Reward now; value of the future",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "Return and discounting",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "State values and action values",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "Derive the Bellman recursion",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Evaluate a fixed policy",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "Evaluate the risky policy by hand",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Policy evaluation as linear algebra",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Solve the safe policy\u0027s system",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Choose actions; average outcomes",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Value iteration",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Value iteration by hand",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  19,
+                       "title":  "Extract a policy from the displayed V",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  20,
+                       "title":  "Policy iteration",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  21,
+                       "title":  "Policy iteration by hand",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Keep three operations separate",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  23,
+                       "title":  "Change risk; change the policy",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  24,
+                       "title":  "Predict, then visualize",
+                       "minutes":  5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  25,
+                       "title":  "Checkpoint \u0026 HW3",
+                       "minutes":  5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Why value iteration converges",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  27,
+                       "title":  "Stopping and numerical error",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  28,
+                       "title":  "A stochastic policy worked example",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  29,
+                       "title":  "A cyclic MDP needs repeated backups",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  30,
+                       "title":  "When does the decision switch?",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "totalMinutes":  45,
+    "presentationMinutes":  35,
+    "demoMinutes":  5,
+    "recapMinutes":  5,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/README.md":  "4D7112C265730DC75BE1C772755A7A74AFC7528559B76788A6A9762F12B5F6F1",
+                           "TEACHING_NOTES.md":  "51967468FB2891634A39200580060E87883FDEADCF0AF39525C7FFADD3577A5D",
+                           "demo/demo.py":  "28694D3D801DEFFFDFBAC1C282FE44D87B154003016C23B4CF5225C9579DE48E",
+                           "demo/test_model.py":  "0BAEA3FCB1FD39D58477EECFE77BEBAC17BA71F6947819492455D2B6BAC4F2E2",
+                           "demo/model.py":  "4DF94D978352099899CF5FA4752270366738C74EE00B4265A59545C26E620566",
+                           "demo/lower_risk.png":  "D880CE32A04EF198249526DBA09B80DF5D56652A5B3E65401BCB648198C6F070",
+                           "demo/requirements.txt":  "11360B13D1DEA254C73BF4AE086BA632FA0DAF342827D186806165C809FD0CB6",
+                           "demo/baseline.png":  "211DEAA1E47F4331FE49A24D015E9300A80EDCD8F2DD9B6C0F9EABE586EE1DFC"
+                       },
+    "independentMathChecks":  [
+                                  "Risky baseline",
+                                  "Safe return",
+                                  "Lower-risk return",
+                                  "VI V0 component0",
+                                  "VI V0 component1",
+                                  "VI V0 component2",
+                                  "VI V0 component3",
+                                  "VI V1 component0",
+                                  "VI V1 component1",
+                                  "VI V1 component2",
+                                  "VI V1 component3",
+                                  "VI V2 component0",
+                                  "VI V2 component1",
+                                  "VI V2 component2",
+                                  "VI V2 component3",
+                                  "VI V3 component0",
+                                  "VI V3 component1",
+                                  "VI V3 component2",
+                                  "VI V3 component3",
+                                  "Greedy safe using V1",
+                                  "Safe matrix row 1 residual",
+                                  "Safe matrix row 2 residual",
+                                  "Risky-policy improvement advantage",
+                                  "Stochastic policy return",
+                                  "Stochastic matrix evaluation",
+                                  "Cyclic system",
+                                  "Failure threshold",
+                                  "Discount threshold",
+                                  "Returned-vector stopping factor"
+                              ],
+    "sourceChecks":  [
+                         "gamma: float = 0.9",
+                         "\u0027safe\u0027: [(1., \u0027detour\u0027, -1.)]",
+                         "(1-failure, \u0027delivered\u0027, 10.)",
+                         "(failure, \u0027failed\u0027, -10.)",
+                         "\u0027finish\u0027: [(1., \u0027delivered\u0027, 8.)]",
+                         "\u0027delivered\u0027: {\u0027stay\u0027: [(1., \u0027delivered\u0027, 0.)]}",
+                         "\u0027failed\u0027: {\u0027stay\u0027: [(1., \u0027failed\u0027, 0.)]}",
+                         "np.linalg.solve(matrix, rewards)",
+                         "tolerance=1e-10, max_iterations=1000",
+                         "new = {s: max(action_values(mdp, s, values).values())",
+                         "if delta \u003c tolerance:",
+                         "if improved == policy and residual \u003c tolerance:",
+                         "self.mdp = delivery_mdp(self.failure)",
+                         "policy_iteration(self.mdp, {\u0027start\u0027:\u0027risky\u0027,\u0027detour\u0027:\u0027finish\u0027})",
+                         "self.failure = float(label)"
+                     ],
+    "pythonSuiteRun":  false,
+    "headlessTraceRun":  false,
+    "pythonLimitation":  "No installed Python. PowerShell arithmetic checks are independent of the Python implementation.",
+    "professorPdfReviewed":  false,
+    "powerPointRendered":  true,
+    "powerPointReopened":  true
+}
