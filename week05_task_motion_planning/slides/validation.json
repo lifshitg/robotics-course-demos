@@ -1,0 +1,233 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Classical planning \u0026 TAMP",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "Part 1 · Classical planning \u0026 PDDL",
+                       "minutes":  0.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "What is classical planning?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "States, predicates, and facts",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "Goals and the closed-world model",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "PDDL: domain versus problem",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "Objects, types, and variables",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "Read the initial state and goal",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "Anatomy of an action",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "When can we pick?",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "What changes after picking?",
+                       "minutes":  2.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Read a loaded move",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "From variables to a concrete action",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Search symbolic states",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Part 2 · Task and motion planning",
+                       "minutes":  0.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "What does TAMP connect?",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "A symbolic plan can fail geometrically",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Empty fits; loaded does not",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  19,
+                       "title":  "The task-and-motion loop",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  20,
+                       "title":  "Refine precisely",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  21,
+                       "title":  "The revised six-action plan",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Planning, validation, and execution",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  23,
+                       "title":  "Demo: predict, reject, revise, execute",
+                       "minutes":  15,
+                       "backup":  false
+                   },
+                   {
+                       "number":  24,
+                       "title":  "Reading place",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  25,
+                       "title":  "State updates and symbolic search",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Swept-disk geometry",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  27,
+                       "title":  "Failure meanings and broader TAMP",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "totalMinutes":  45,
+    "presentationMinutes":  30,
+    "pddlMinutes":  20,
+    "tampMinutes":  10,
+    "demoMinutes":  10,
+    "recapMinutes":  5,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/geometry.py":  "F2F0CF1480E7EC565449D13137FCC4498319070102CAB76E34C039FB856960FE",
+                           "demo/README.md":  "6459A9823BA486C2A47ABE74753B4C57E374CE1C893B02CD55AD424F2AA20F4A",
+                           "demo/planning.py":  "AA295D834E801324049B6C8B8CE152A83F48E65285421E18CB1B87B57ACCFB5B",
+                           "demo/requirements.txt":  "71413A8EC7FBA1F10061F2B67730FEB310FAF657FD5E1A2AAFDC8E4BE8FF6DCE",
+                           "TEACHING_NOTES.md":  "903BC066F2506AB8120DDF1C146BED93F7FAA9B932D31BA7E56AB539BC5FEAD0",
+                           "demo/delivered.png":  "5B373D56D8123615C4B1FE45526819FF0AB82B6DE5F0F8DDCD5115FA611EDCEA",
+                           "demo/problem.pddl":  "EB42F9238A2EBB4059911C257B82D6E8709D7D163308DC2DA110DB07BCC753B8",
+                           "demo/rejected.png":  "A3004A1A3C2A924075E9FBF175D3DBF79625C5E0B8718CA0FDBD8B3677F6CB87",
+                           "demo/domain.pddl":  "0A74F245CED2D63C3E43937B744EBF9530384826B0C27F6935AB4534F07FE523",
+                           "demo/test_demo.py":  "4A54885D627DE3336E8D81DBA86C0C2484C32567A4B2781BFD11118D3E6C6A79",
+                           "demo/overview.png":  "124588B720BC14935F1F1EA1D091924096923B1A174A7AC6ABA1C686BEF54635",
+                           "demo/scene.json":  "5678ED8444388CE29189A01989D08F770ED703420FA8A079907A9A1EAAF8F90E",
+                           "demo/demo.py":  "F972D71A4E3605D6C11A0D3765C5C991DC625AD07FF1B1C0BCD9DEA00E9B98CB"
+                       },
+    "independentChecks":  [
+                              "Grounded pick exists but is initially inapplicable",
+                              "Empty move makes pickup applicable",
+                              "Pick add/delete effects and unchanged robot location",
+                              "Authored PDDL independently yields exact four-action BFS candidate",
+                              "Third candidate action fails swept-disk validation",
+                              "Refinement preserves empty and reverse loaded permissions",
+                              "Refined model independently yields exact six-action BFS plan",
+                              "Every revised motion and footprint change is valid",
+                              "Place achieves delivery goal and releases parcel",
+                              "Independent hypothetical checks leave original state unchanged",
+                              "Shortcut centerline clearance is 0.20 m",
+                              "Empty passes; tangent and loaded footprints fail",
+                              "Workspace contact rejected; strictly inside accepted",
+                              "Sixteen directed/load-specific permissions; at most seventeen searches"
+                          ],
+    "excerptChecks":  [
+                          "place",
+                          "permission",
+                          "loadedpre",
+                          "goal",
+                          "fact",
+                          "predicate",
+                          "types",
+                          "pickeffect",
+                          "objects",
+                          "emptypermission",
+                          "reversepermission",
+                          "pickhead",
+                          "moveeffect",
+                          "init"
+                      ],
+    "sourceChecks":  [
+                         "after = op.apply(state)",
+                         "state = frozenset(task.initial_state)",
+                         "plan = breadth_first_search(task)",
+                         "range(len(permissions)+1)",
+                         "task = load_task(refine_problem(original,rejected))"
+                     ],
+    "pythonSuiteRun":  false,
+    "pythonLimitation":  "Python unavailable; independent C# checks are not Pyperplan or GUI execution."
+}
