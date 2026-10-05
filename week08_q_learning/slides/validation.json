@@ -1,0 +1,239 @@
+﻿{
+    "slides":  [
+                   {
+                       "number":  1,
+                       "title":  "Q-learning",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  2,
+                       "title":  "From planning and imitation to RL",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  3,
+                       "title":  "Our maze and interaction loop",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  4,
+                       "title":  "Reward versus return",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  5,
+                       "title":  "What does Q(s,a) mean?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  6,
+                       "title":  "Max returns a value; argmax an action",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  7,
+                       "title":  "Bellman optimality for Q",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  8,
+                       "title":  "From a model expectation to experience",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  9,
+                       "title":  "Derive the Q-learning update",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  10,
+                       "title":  "Calculate one transition",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  11,
+                       "title":  "Termination is different from truncation",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  12,
+                       "title":  "Why the maximum in the target?",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
+                       "title":  "Q-learning is off-policy",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  14,
+                       "title":  "Compare with SARSA",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  15,
+                       "title":  "Why explore and exploit?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  16,
+                       "title":  "Epsilon-greedy: actual probabilities",
+                       "minutes":  2,
+                       "backup":  false
+                   },
+                   {
+                       "number":  17,
+                       "title":  "Exploration in our implementation",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  18,
+                       "title":  "Training versus evaluation",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  19,
+                       "title":  "Read the algorithm",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  20,
+                       "title":  "Interpret the learning results",
+                       "minutes":  1,
+                       "backup":  false
+                   },
+                   {
+                       "number":  21,
+                       "title":  "What does this result establish?",
+                       "minutes":  1.5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  22,
+                       "title":  "Predict the update, then train",
+                       "minutes":  10,
+                       "backup":  false
+                   },
+                   {
+                       "number":  23,
+                       "title":  "Questions \u0026 recap",
+                       "minutes":  5,
+                       "backup":  false
+                   },
+                   {
+                       "number":  24,
+                       "title":  "Bellman expectation and sample targets",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  25,
+                       "title":  "Convergence conditions and step sizes",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  26,
+                       "title":  "Q-learning versus SARSA: extended check",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  27,
+                       "title":  "The maximum can favor noisy estimates",
+                       "minutes":  0,
+                       "backup":  true
+                   },
+                   {
+                       "number":  28,
+                       "title":  "Termination, truncation, and code",
+                       "minutes":  0,
+                       "backup":  true
+                   }
+               ],
+    "totalMinutes":  45,
+    "presentationMinutes":  30,
+    "demoMinutes":  10,
+    "recapMinutes":  5,
+    "slideWidth":  960,
+    "slideHeight":  540,
+    "layoutIssues":  [
+
+                     ],
+    "protectedFiles":  {
+                           "demo/.gitignore":  "AC016A87246C27AEF2D546151A4B76A66D9A84326DBBD156F1AE4A30C558A18F",
+                           "demo/README.md":  "D485C36D5D985E47B9C0CABA5D8D9A65A0698A34FE9C42B43C5B7EA7BFF414B3",
+                           "demo/learning.py":  "92897C2C7135AA6522786D533ECD3A3BE070254A9C59FF0B1F08E8889DF532E6",
+                           "demo/after.png":  "A32F9455D4355302A3D32A91CA78942E0D469A28AFE31D1A9E334E4008F68262",
+                           "TEACHING_NOTES.md":  "B9F7A675046C133D73E2789298F1AB3049468DD9B8983A60FB71C60624D6A3A2",
+                           "demo/demo.py":  "1A4AFD2A0A6BFC753F5FBDE44BDCA623BA0CB56D1F9ECB49470CD80EA1950609",
+                           "demo/before.png":  "274B49EF8F5971CB0C8D342D59C882541E245A06E4FA3A744EC1BA5D238CB168",
+                           "demo/gridworld.py":  "23DC0EC834C8B6E4AF6EAD12C265CDF1A1D3D23639D171FB917965EB719053E3",
+                           "demo/test_demo.py":  "3AA28760E5BE0EE09143E5CC8C08EC9B2D7F4417CFBECB63A3C47A90DA5D05CF",
+                           "demo/requirements.txt":  "11360B13D1DEA254C73BF4AE086BA632FA0DAF342827D186806165C809FD0CB6"
+                       },
+    "independentContentChecks":  [
+                                     "Nonterminal target",
+                                     "Nonterminal new Q",
+                                     "Terminal target",
+                                     "First goal new Q",
+                                     "First ordinary zero-table update",
+                                     "SARSA target",
+                                     "SARSA new Q",
+                                     "Unique greedy probability",
+                                     "Each nongreedy probability",
+                                     "Total probability",
+                                     "Nongreedy probability",
+                                     "Two-way greedy tie probability",
+                                     "Four-way tie probability",
+                                     "Eight-step raw return",
+                                     "Eight-step discounted return",
+                                     "Authored excerpt explore matches learning.py",
+                                     "Authored excerpt terminal matches learning.py",
+                                     "Authored excerpt update matches learning.py",
+                                     "Update uses pre-reset next state; truncation determined afterwards",
+                                     "Evaluation source reads Q; no update or RNG access",
+                                     "28 slides; five hidden backups"
+                                 ],
+    "sourceChecks":  [
+                         "learning.py / TRAINING_EPSILON = 0.2",
+                         "learning.py / alpha=.2, gamma=.95",
+                         "learning.py / q[state+(action,)] = new",
+                         "learning.py / self.q = np.zeros((5,5,4))",
+                         "learning.py / exploratory = bool(self.rng.random() \u003c eps)",
+                         "learning.py / int(self.rng.integers(4)) if exploratory",
+                         "learning.py / self.rng.choice(np.flatnonzero(self.q[state] == self.q[state].max()))",
+                         "learning.py / truncated = self.steps \u003e= 100 and not terminated",
+                         "learning.py / action = int(q[state].argmax())",
+                         "demo.py / self.learner=Learner(self.seed, self.learner.epsilon)",
+                         "demo.py / self.learner.set_epsilon(percent/100)",
+                         "gridworld.py / START = (4, 0)",
+                         "gridworld.py / GOAL = (0, 4)",
+                         "gridworld.py / {(1, 1), (1, 2), (2, 2), (3, 1), (3, 3)}",
+                         "gridworld.py / return nxt, 10. if terminated else -1., terminated"
+                     ],
+    "pythonSuiteRun":  false,
+    "headlessTraceRun":  false,
+    "pythonLimitation":  "No installed Python. PowerShell content checks are independent of the Python implementation.",
+    "professorPdfReviewed":  false,
+    "powerPointRendered":  true,
+    "powerPointReopened":  true
+}
