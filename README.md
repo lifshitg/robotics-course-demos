@@ -17,7 +17,7 @@ if it is private. PowerPoint files may need to be downloaded to open.
 
 | Week | Topic | Slides | Preparation | Demo / board work |
 | --- | --- | --- | --- | --- |
-| 1 | ROS 2 | [PDF](week01_ros/ROS_BASICS_UPDATED.pdf) · [PowerPoint](week01_ros/ROS_BASICS_UPDATED.pptx) | [Notes](week01_ros/TEACHING_NOTES.md) · [Plan](week01_ros/PRESENTATION_PLAN.md) | [Publisher/subscriber](week01_ros/demo/README.md) |
+| 1 | ROS 2 | [PDF](week01_ros/ROS_BASICS_FINAL.pdf) · [PowerPoint](week01_ros/ROS_BASICS_FINAL.pptx) | [Notes](week01_ros/TEACHING_NOTES.md) · [Final deck guide](week01_ros/slides/README.md) · [Original plan](week01_ros/PRESENTATION_PLAN.md) | [Publisher/subscriber](week01_ros/demo/README.md) |
 | 2 | Coordinate transforms and tf2 | [PDF](week02_tf/TF_COORDINATE_TRANSFORMS.pdf) · [PowerPoint](week02_tf/TF_COORDINATE_TRANSFORMS.pptx) | [Notes](week02_tf/TEACHING_NOTES.md) · [Plan](week02_tf/PRESENTATION_PLAN.md) | [Python/RViz](week02_tf/demo/README.md) |
 | 3 | Gazebo and robot kinematics | [PDF](week03_kinematics/GAZEBO_AND_KINEMATICS.pdf) · [PowerPoint](week03_kinematics/GAZEBO_AND_KINEMATICS.pptx) | [Notes](week03_kinematics/TEACHING_NOTES.md) · [Plan](week03_kinematics/PRESENTATION_PLAN.md) | [Two-joint arm](week03_kinematics/demo/README.md) |
 | 4 | Configuration space and PRM | [PDF](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pdf) · [PowerPoint](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pptx) | [Notes](week04_motion_planning/TEACHING_NOTES.md) · [Plan](week04_motion_planning/PRESENTATION_PLAN.md) | [Interactive planning](week04_motion_planning/demo/README.md) |
@@ -29,7 +29,9 @@ if it is private. PowerPoint files may need to be downloaded to open.
 | 10 | POMDP foundations and belief updates | [PDF](week10_pomdp/POMDP_FOUNDATIONS_AND_BELIEF_UPDATES.pdf) · [PowerPoint](week10_pomdp/POMDP_FOUNDATIONS_AND_BELIEF_UPDATES.pptx) | [Notes](week10_pomdp/TEACHING_NOTES.md) · [Plan](week10_pomdp/PRESENTATION_PLAN.md) | [Board-work guide](week10_pomdp/demo/README.md) |
 | 12 | Particle filters and SLAM | [PDF](week12_filters_slam/SLAM_AND_BAYESIAN_ESTIMATION.pdf) · [PowerPoint](week12_filters_slam/SLAM_AND_BAYESIAN_ESTIMATION.pptx) | [Notes](week12_filters_slam/TEACHING_NOTES.md) · [Plan](week12_filters_slam/PRESENTATION_PLAN.md) | [Localization and SLAM visualization](week12_filters_slam/demo/README.md) |
 
-Week 1 links use the updated deck; the original `ROS_BASICS` files are also retained.
+Week 1 links use the final deck: 15 main slides and five hidden PowerPoint backups.
+Its reference PDF includes all 20 slides. The original `ROS_BASICS` and
+`ROS_BASICS_UPDATED` files are also retained.
 For Week 2, see the [transform mathematics reference](week02_tf/TF_MATH_REFERENCE.md).
 
 ## Planned sessions
@@ -46,5 +48,6 @@ in their individual READMEs. Week 10 provides board work rather than an executab
 
 Each prepared week includes `TEACHING_NOTES.md`, `PRESENTATION_PLAN.md`, and a
 `demo/` directory. Where a `slides/README.md` is present, it documents rebuilding
-and reviewing the deck; the PowerPoint build scripts require Windows with installed
-PowerPoint. Consult the week's rehearsal checklist before teaching.
+and reviewing the deck. The PowerShell build scripts require Windows with installed
+PowerPoint; Week 1's final deck also has a Python builder with LibreOffice PDF export.
+Consult the week's rehearsal checklist before teaching.

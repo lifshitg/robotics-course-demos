@@ -1,0 +1,32 @@
+[
+  {
+    "file": "autonomous_vehicle.jpg",
+    "title": "Google self-driving car in Mountain View.jpg",
+    "author": "Mark Doliner",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Google_self-driving_car_in_Mountain_View.jpg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/9/97/Google_self-driving_car_in_Mountain_View.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "changes": "Displayed with a rectangular crop; original downloaded image retained."
+  },
+  {
+    "file": "robotics.jpg",
+    "title": "Cobot.jpg",
+    "author": "GrowSkills Robotics",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cobot.jpg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/5/57/Cobot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "changes": "Displayed with a rectangular crop; original downloaded image retained."
+  },
+  {
+    "file": "drone.jpg",
+    "title": "DJI Phantom 4Pro 04-2017 img3 in flight.jpg",
+    "author": "A.Savin",
+    "license": "FAL",
+    "license_url": "http://artlibre.org/licence/lal/en",
+    "source": "https://commons.wikimedia.org/wiki/File:DJI_Phantom_4Pro_04-2017_img3_in_flight.jpg",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/9/99/DJI_Phantom_4Pro_04-2017_img3_in_flight.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "changes": "Displayed with a rectangular crop; original downloaded image retained."
+  }
+]
