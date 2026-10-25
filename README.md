@@ -18,7 +18,7 @@ if it is private. PowerPoint files may need to be downloaded to open.
 | Week | Topic | Slides | Preparation | Demo / board work |
 | --- | --- | --- | --- | --- |
 | 1 | ROS 2 | [PDF](week01_ros/ROS_BASICS_FINAL.pdf) · [PowerPoint](week01_ros/ROS_BASICS_FINAL.pptx) | [Notes](week01_ros/TEACHING_NOTES.md) · [Final deck guide](week01_ros/slides/README.md) · [Original plan](week01_ros/PRESENTATION_PLAN.md) | [Publisher/subscriber](week01_ros/demo/README.md) |
-| 2 | Coordinate transforms and tf2 | [PDF](week02_tf/TF_COORDINATE_TRANSFORMS.pdf) · [PowerPoint](week02_tf/TF_COORDINATE_TRANSFORMS.pptx) | [Notes](week02_tf/TEACHING_NOTES.md) · [Plan](week02_tf/PRESENTATION_PLAN.md) | [Python/RViz](week02_tf/demo/README.md) |
+| 2 | Coordinate transforms and tf2 | [PDF](week02_tf/TF_COORDINATE_TRANSFORMS_UPDATED.pdf) · [PowerPoint](week02_tf/TF_COORDINATE_TRANSFORMS_UPDATED.pptx) | [Notes](week02_tf/TEACHING_NOTES.md) · [Updated deck guide](week02_tf/slides/README.md) · [Original plan](week02_tf/PRESENTATION_PLAN.md) | [Python/RViz](week02_tf/demo/README.md) |
 | 3 | Gazebo and robot kinematics | [PDF](week03_kinematics/GAZEBO_AND_KINEMATICS.pdf) · [PowerPoint](week03_kinematics/GAZEBO_AND_KINEMATICS.pptx) | [Notes](week03_kinematics/TEACHING_NOTES.md) · [Plan](week03_kinematics/PRESENTATION_PLAN.md) | [Two-joint arm](week03_kinematics/demo/README.md) |
 | 4 | Configuration space and PRM | [PDF](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pdf) · [PowerPoint](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pptx) | [Notes](week04_motion_planning/TEACHING_NOTES.md) · [Plan](week04_motion_planning/PRESENTATION_PLAN.md) | [Interactive planning](week04_motion_planning/demo/README.md) |
 | 5 | Classical planning and task-and-motion planning | [PDF](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pdf) · [PowerPoint](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pptx) | [Notes](week05_task_motion_planning/TEACHING_NOTES.md) · [Plan](week05_task_motion_planning/PRESENTATION_PLAN.md) | [Delivery planning](week05_task_motion_planning/demo/README.md) |
@@ -32,7 +32,9 @@ if it is private. PowerPoint files may need to be downloaded to open.
 Week 1 links use the final deck: 15 main slides and five hidden PowerPoint backups.
 Its reference PDF includes all 20 slides. The original `ROS_BASICS` and
 `ROS_BASICS_UPDATED` files are also retained.
-For Week 2, see the [transform mathematics reference](week02_tf/TF_MATH_REFERENCE.md).
+Week 2 links use the updated deck: 18 visible slides, no hidden slides, and a
+matching 18-page PDF. The original presentation files are retained. See the
+[transform mathematics reference](week02_tf/TF_MATH_REFERENCE.md) for additional detail.
 
 ## Planned sessions
 
