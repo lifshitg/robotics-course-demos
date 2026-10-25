@@ -1,0 +1,56 @@
+﻿{
+    "status":  "PASS",
+    "physicalSlides":  18,
+    "orderedSlides":  18,
+    "hiddenSlides":  0,
+    "pdfPages":  18,
+    "notes":  18,
+    "unchangedContentSlides":  [
+                                   1,
+                                   2,
+                                   15,
+                                   16
+                               ],
+    "unchangedRenderSlides":  [
+                                  {
+                                      "slide":  1,
+                                      "footerExcluded":  true,
+                                      "changedChannelFraction":  0.0026931449979748887,
+                                      "originalSlide":  1,
+                                      "meanChannelError":  0.12647174969623329,
+                                      "renderComparisonPassed":  true
+                                  },
+                                  {
+                                      "slide":  2,
+                                      "footerExcluded":  true,
+                                      "changedChannelFraction":  0.0042317233697853384,
+                                      "originalSlide":  2,
+                                      "meanChannelError":  0.34382948562170917,
+                                      "renderComparisonPassed":  true
+                                  },
+                                  {
+                                      "slide":  15,
+                                      "footerExcluded":  true,
+                                      "changedChannelFraction":  0.0010958383961117862,
+                                      "originalSlide":  13,
+                                      "meanChannelError":  0.077948055893074117,
+                                      "renderComparisonPassed":  true
+                                  },
+                                  {
+                                      "slide":  16,
+                                      "footerExcluded":  true,
+                                      "changedChannelFraction":  0.0045833333333333334,
+                                      "originalSlide":  14,
+                                      "meanChannelError":  0.21624012758201702,
+                                      "renderComparisonPassed":  true
+                                  }
+                              ],
+    "mathematicalChecks":  209,
+    "boldVectorSymbols":  true,
+    "suppliedImagePreserved":  true,
+    "hyperlinkSlide":  6,
+    "hyperlinkTimestampSeconds":  140,
+    "demoExecuted":  false,
+    "protectedFilesUnchanged":  true,
+    "visualInspection":  "Inspect contact_01.png through contact_05.png and full-resolution slide renders."
+}

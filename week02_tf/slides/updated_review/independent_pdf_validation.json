@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "pdfPages": 18,
+  "pageSizePoints": [
+    960,
+    540
+  ],
+  "hyperlinkSlide": 6,
+  "hyperlinkTimestampSeconds": 140,
+  "suppliedImageMatchesDownloads": true,
+  "replacementCharacters": false,
+  "pptxSHA256": "c73cab44d8290cf9703179afdac63805a5fbc99d02a6831d72310e02b089cee4",
+  "pdfSHA256": "7cee5202e3ce9966603af07a547d8e799bdecc45885ea1b7e57ff0581317afa9",
+  "handImageSHA256": "8fe86a2f977963a07a2317c7e2aac017d6125f1bb050b78432796c57dfd39f8d"
+}
