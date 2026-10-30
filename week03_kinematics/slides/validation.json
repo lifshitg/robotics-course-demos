@@ -68,42 +68,48 @@
                    },
                    {
                        "number":  12,
+                       "title":  "Forward kinematics geometry",
+                       "minutes":  0,
+                       "backup":  false
+                   },
+                   {
+                       "number":  13,
                        "title":  "Inverse kinematics",
                        "minutes":  1.5,
                        "backup":  false
                    },
                    {
-                       "number":  13,
+                       "number":  14,
                        "title":  "Verify what happened",
                        "minutes":  1.5,
                        "backup":  false
                    },
                    {
-                       "number":  14,
+                       "number":  15,
                        "title":  "Live demo: predict, command, inspect",
                        "minutes":  25,
                        "backup":  false
                    },
                    {
-                       "number":  15,
+                       "number":  16,
                        "title":  "Forward kinematics as transforms",
                        "minutes":  0,
                        "backup":  true
                    },
                    {
-                       "number":  16,
+                       "number":  17,
                        "title":  "Derive the inverse kinematics",
                        "minutes":  0,
                        "backup":  true
                    },
                    {
-                       "number":  17,
+                       "number":  18,
                        "title":  "Workspace and singular boundaries",
                        "minutes":  0,
                        "backup":  true
                    },
                    {
-                       "number":  18,
+                       "number":  19,
                        "title":  "Bridge and configuration checks",
                        "minutes":  0,
                        "backup":  true

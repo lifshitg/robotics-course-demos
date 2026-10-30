@@ -2,7 +2,7 @@
 
 Gazebo is the main subject: what simulation gives us, why Gazebo fits the course, and how its configuration and ROS bridge support the existing workflow. FK/IK are brief visual practice, not the main lecture. Audience has Python familiarity and Weeks 1–2 ROS/TF basics.
 
-**20 minutes explanation + 25 minutes demo/questions = 45 minutes.** Title is untimed; twelve teaching slides, demo transition and four hidden backups give 18 slides overall. Incorporate the former separate recap into the workflow and model sketch. Use the Weeks 1–2 light background, blue/teal palette, sparse prose, editable diagrams/equations, body text at least 24 pt, and detailed speaker notes with sources.
+**20 minutes explanation + 25 minutes demo/questions = 45 minutes.** Title is untimed; twelve teaching slides, one untimed picture-only geometry slide, demo transition and four hidden backups give 19 slides overall. Incorporate the former separate recap into the workflow and model sketch. Use the Weeks 1–2 light background, blue/teal palette, sparse prose, editable diagrams/equations, body text at least 24 pt, and detailed speaker notes with sources.
 
 Baseline: ROS 2 Jazzy and Gazebo Harmonic (Gazebo Sim 8). Preserve teaching notes and every demo file. All twelve existing Week 3 files were read; no separate professor Week 3 lecture was supplied. Existing TA_plan.md Session 3, HW1 and HW3 connections remain relevant. Use the existing captured screenshot honestly as an illustration of a bent arm pose; a new launch begins at zero angles.
 
@@ -103,6 +103,10 @@ Visual: blue/orange arm sketch beside two large editable equations. x=L1 cos(q1)
 Source: Existing course demo: demo/kinematics.py, demo/test_kinematics.py, and demo/arm.urdf
 
 
+### Forward kinematics geometry — Untimed picture
+
+Slide 12 contains only the user-supplied geometry diagram, between the original slides 11 and 12. The diagram illustrates the cosine and sine projections in the preceding FK equations; theta corresponds to q. Existing slide content and timing are unchanged.
+
 ### Inverse kinematics — Teaching 11 / 1.5 minutes
 
 Visual: two editable arm configurations converging on target (0.6,0.4), plus three compact formula lines. c2=(x²+y²−L1²−L2²)/(2L1L2); q2=±acos(c2); q1=atan2(y,x)−atan2(L2 sin(q2),L1+L2 cos(q2)). Briefly point out the two signs, without live derivation. Positive/negative refer exactly to the sign of q2, avoiding convention-dependent elbow-up/down names. Positive branch=(0,1.570796); negative≈(1.176005,−1.570796). Both reach the same xy point but tool orientations differ: about 1.570796 rad and −0.394791 rad. This interface solves position only. At singular boundaries the geometric branches merge (up to angle wrapping), and not every target is reachable. The existing code checks finite values, radius and joint limits, clamps only numerical boundary roundoff, and normalizes q1 with atan2(sin(q1),cos(q1)). Show where the equations appear in inverse during the demo. Hidden backup derives the cosine rule.
@@ -164,6 +168,6 @@ Source: https://github.com/ros/robot_state_publisher/blob/jazzy/README.md
 
 ## Deliverables and validation
 
-GAZEBO_AND_KINEMATICS.pptx contains 18 editable widescreen slides, notes on every slide, four hidden backups (slides 15–18). The PDF includes all 18 slides. Reproducible source content, PowerPoint generator, mathematical validation, rendered previews, and inspection results are under slides/.
+GAZEBO_AND_KINEMATICS.pptx contains 19 widescreen slides, including one picture-only geometry slide, notes on every slide, four hidden backups (slides 16–19). The PDF includes all 19 slides. Reproducible source content, PowerPoint generator, mathematical validation, rendered previews, and inspection results are under slides/.
 
 Validate link lengths/axes/limits against URDF; bridge names/types/directions against bridge.yaml; FK zero and worked examples; both IK branches and orientations; FK/IK round trips, geometric workspace boundaries, rejected targets, transform-product agreement, and singular Jacobian determinant. Reopen the saved deck in PowerPoint, verify notes/hidden states/timing, count PDF pages, inspect every slide preview, and check actual text bounds. Compare hashes for all eleven protected files. Numeric/artifact checks do not claim a new classroom ROS/Gazebo rehearsal on this Windows slide-generation machine. Follow the unchanged README on the Jazzy/Harmonic teaching machine for that rehearsal.

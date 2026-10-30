@@ -76,12 +76,28 @@ function NewSlide([string]$title,[string]$subtitle,[double]$minutes,[string]$not
   if ($subtitle) { Text 54 124 852 64 $subtitle 26 $C.muted }
   Line 54 494 906 494 $C.line
   Text 54 504 660 24 'Robotics & Autonomous Systems · ROS 2 Jazzy / Gazebo Harmonic' 16 $C.muted
-  Text 836 504 70 24 ('{0:00}' -f $script:slide.SlideIndex) 16 $C.muted $false 3
+  Text 836 504 70 24 ('{0:00}' -f ($script:slide.SlideIndex - [int]($script:slide.SlideIndex -gt 12))) 16 $C.muted $false 3
   $noteBody=$script:slide.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange
   $noteBody.Text=$notes
   $noteBody.Font.Name='Aptos'; $noteBody.Font.Size=12
   $script:slide.SlideShowTransition.AdvanceOnTime=0
   $script:slides.Add([pscustomobject]@{number=$script:slide.SlideIndex; title=$title; minutes=$minutes; backup=$backup})
+}
+function NewMathPictureSlide {
+  $script:slide=$presentation.Slides.Add($presentation.Slides.Count+1,12)
+  $script:slide.FollowMasterBackground=0
+  $script:slide.Background.Fill.Solid()
+  $script:slide.Background.Fill.ForeColor.RGB=$C.white
+  $imagePath=Join-Path $PSScriptRoot 'assets/forward_kinematics_geometry.jpg'
+  $picture=$script:slide.Shapes.AddPicture($imagePath,0,-1,0,0,-1,-1)
+  $picture.LockAspectRatio=-1
+  $picture.Height=$H
+  if($picture.Width -gt $W){$picture.Width=$W}
+  $picture.Left=($W-$picture.Width)/2
+  $picture.Top=($H-$picture.Height)/2
+  $script:slide.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text='Geometry of planar forward kinematics. The supplied diagram uses theta_1 and theta_2 for q1 and q2. Each link contributes its horizontal cosine and vertical sine projection; the second link has absolute angle theta_1 + theta_2.'
+  $script:slide.SlideShowTransition.AdvanceOnTime=0
+  $script:slides.Add([pscustomobject]@{number=$script:slide.SlideIndex; title='Forward kinematics geometry'; minutes=0; backup=$false})
 }
 function Formula([double]$x,[double]$y,[double]$w,[double]$h,[string]$value,[double]$size=32,[int]$color=$C.ink,[int]$align=1) {
   # Editable text with true superscript/subscript offsets, never a raster equation.
@@ -157,7 +173,7 @@ $planBuilder=New-Object Text.StringBuilder
 
 Gazebo is the main subject: what simulation gives us, why Gazebo fits the course, and how its configuration and ROS bridge support the existing workflow. FK/IK are brief visual practice, not the main lecture. Audience has Python familiarity and Weeks 1–2 ROS/TF basics.
 
-**20 minutes explanation + 25 minutes demo/questions = 45 minutes.** Title is untimed; twelve teaching slides, demo transition and four hidden backups give 18 slides overall. Incorporate the former separate recap into the workflow and model sketch. Use the Weeks 1–2 light background, blue/teal palette, sparse prose, editable diagrams/equations, body text at least 24 pt, and detailed speaker notes with sources.
+**20 minutes explanation + 25 minutes demo/questions = 45 minutes.** Title is untimed; twelve teaching slides, one untimed picture-only geometry slide, demo transition and four hidden backups give 19 slides overall. Incorporate the former separate recap into the workflow and model sketch. Use the Weeks 1–2 light background, blue/teal palette, sparse prose, editable diagrams/equations, body text at least 24 pt, and detailed speaker notes with sources.
 
 Baseline: ROS 2 Jazzy and Gazebo Harmonic (Gazebo Sim 8). Preserve teaching notes and every demo file. All twelve existing Week 3 files were read; no separate professor Week 3 lecture was supplied. Existing TA_plan.md Session 3, HW1 and HW3 connections remain relevant. Use the existing captured screenshot honestly as an illustration of a bent arm pose; a new launch begins at zero angles.
 
@@ -168,11 +184,12 @@ foreach($entry in $lesson){
  $tag=$(if($entry.backup){'Hidden / untimed'}elseif($entry.minutes -eq 25){'Demo / 25 minutes'}elseif($entry.minutes){$coreNumber++;"Teaching $coreNumber / $($entry.minutes) minutes"}else{'Untimed title'})
  [void]$planBuilder.AppendLine("`n### $($entry.title) — $tag`n`n$($entry.notes.Trim())`n")
  foreach($key in $entry.refs){[void]$planBuilder.AppendLine("Source: $($sources[$key])`n")}
+ if($entry.kind -eq 'fk'){[void]$planBuilder.AppendLine("`n### Forward kinematics geometry — Untimed picture`n`nSlide 12 contains only the user-supplied geometry diagram, between the original slides 11 and 12. The diagram illustrates the cosine and sine projections in the preceding FK equations; theta corresponds to q. Existing slide content and timing are unchanged.`n")}
 }
 [void]$planBuilder.AppendLine(@'
 ## Deliverables and validation
 
-GAZEBO_AND_KINEMATICS.pptx contains 18 editable widescreen slides, notes on every slide, four hidden backups (slides 15–18). The PDF includes all 18 slides. Reproducible source content, PowerPoint generator, mathematical validation, rendered previews, and inspection results are under slides/.
+GAZEBO_AND_KINEMATICS.pptx contains 19 widescreen slides, including one picture-only geometry slide, notes on every slide, four hidden backups (slides 16–19). The PDF includes all 19 slides. Reproducible source content, PowerPoint generator, mathematical validation, rendered previews, and inspection results are under slides/.
 
 Validate link lengths/axes/limits against URDF; bridge names/types/directions against bridge.yaml; FK zero and worked examples; both IK branches and orientations; FK/IK round trips, geometric workspace boundaries, rejected targets, transform-product agreement, and singular Jacobian determinant. Reopen the saved deck in PowerPoint, verify notes/hidden states/timing, count PDF pages, inspect every slide preview, and check actual text bounds. Compare hashes for all eleven protected files. Numeric/artifact checks do not claim a new classroom ROS/Gazebo rehearsal on this Windows slide-generation machine. Follow the unchanged README on the Jazzy/Harmonic teaching machine for that rehearsal.
 '@)
@@ -262,6 +279,7 @@ try {
     Formula 410 241 496 56 'x = L_{1} cos(q_{1}) + L_{2} cos(q_{1}+q_{2})' 29 $C.blue
     Formula 410 315 496 56 'y = L_{1} sin(q_{1}) + L_{2} sin(q_{1}+q_{2})' 29 $C.teal
     Text 54 437 852 43 '(q₁, q₂) = (0, π/2)   →   (x, y) = (0.6, 0.4) m' 28 $C.ink $true
+    NewMathPictureSlide
    }
    'ik' {
     Text 54 209 178 40 'Positive q₂' 25 $C.blue $true;Text 256 209 191 40 'Negative q₂' 25 $C.teal $true
@@ -319,8 +337,8 @@ try {
    }
   }
  }
- if($presentation.Slides.Count -ne 18){throw 'Expected 18 slides'}
- $explanation=($script:slides | Where-Object {$_.number -ge 2 -and $_.number -le 13} | Measure-Object minutes -Sum).Sum
+ if($presentation.Slides.Count -ne 19){throw 'Expected 19 slides'}
+ $explanation=($script:slides | Where-Object {$_.number -ge 2 -and $_.number -le 14} | Measure-Object minutes -Sum).Sum
  if($explanation -ne 20 -or ($script:slides | Measure-Object minutes -Sum).Sum -ne 45){throw 'Incorrect lesson timing'}
  foreach($item in $presentation.Slides){foreach($shape in $item.Shapes){if($shape.HasTextFrame -eq -1 -and $shape.TextFrame.HasText -eq -1){$tr=$shape.TextFrame.TextRange;if($tr.BoundHeight -gt $shape.Height+2 -or $tr.BoundWidth -gt $shape.Width+2){$script:issues.Add("Slide $($item.SlideIndex): text $([math]::Round($tr.BoundWidth,1))×$([math]::Round($tr.BoundHeight,1)) exceeds box $($shape.Width)×$($shape.Height): $($tr.Text)")}}}}
  New-Item -ItemType Directory -Path $previewPath -Force | Out-Null
@@ -329,12 +347,12 @@ try {
  foreach($info in $script:slides){if($info.backup){$presentation.Slides.Item($info.number).SlideShowTransition.Hidden=-1}}
  $presentation.SaveAs($pptxPath,24);$presentation.Close();$presentation=$null
  $check=$app.Presentations.Open($pptxPath,-1,0,0)
- if($check.Slides.Count -ne 18){throw 'Reopened slide count incorrect'}
- for($idx=1;$idx -le 18;$idx++){$item=$check.Slides.Item($idx);if(($item.SlideShowTransition.Hidden -eq -1) -ne ($idx -ge 15)){throw "Hidden state incorrect: $idx"};if($item.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text.Length -lt 100){throw "Missing notes: $idx"}}
+ if($check.Slides.Count -ne 19){throw 'Reopened slide count incorrect'}
+ for($idx=1;$idx -le 19;$idx++){$item=$check.Slides.Item($idx);if(($item.SlideShowTransition.Hidden -eq -1) -ne ($idx -ge 16)){throw "Hidden state incorrect: $idx"};if($item.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text.Length -lt 100){throw "Missing notes: $idx"}}
  $check.Close()
  foreach($path in $protectedPaths){if((Get-FileHash (Join-Path $root $path)).Hash -ne $protectedHashes[$path]){throw "Protected file changed: $path"}}
  [pscustomobject]@{slides=$script:slides;timingMinutes=45;explanationMinutes=20;demoMinutes=25;slideWidth=$W;slideHeight=$H;layoutIssues=$script:issues;protectedFiles=$protectedHashes;generated=@(($OutputBaseName+'.pptx'),($OutputBaseName+'.pdf'))} | ConvertTo-Json -Depth 6 | Set-Content (Join-Path $PSScriptRoot 'validation.json') -Encoding UTF8
- Write-Output 'Created and reopened: 18 slides, 4 hidden backups, notes on every slide. Protected files unchanged.'
+ Write-Output 'Created and reopened: 19 slides, 4 hidden backups, notes on every slide. Protected files unchanged.'
  if($script:issues.Count){$script:issues | ForEach-Object {Write-Output $_}}else{Write-Output 'No text overflow detected.'}
 } finally {
  if($null -ne $presentation){try{$presentation.Close()}catch{}}
