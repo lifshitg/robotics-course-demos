@@ -12,7 +12,7 @@ $zip=[IO.Compression.ZipFile]::OpenRead((Join-Path $root 'GAZEBO_AND_KINEMATICS.
 try{
  $slides=@($zip.Entries | Where-Object {$_.FullName -match '^ppt/slides/slide\d+\.xml$'})
  $notes=@($zip.Entries | Where-Object {$_.FullName -match '^ppt/notesSlides/notesSlide\d+\.xml$'})
- if($slides.Count -ne 19 -or $notes.Count -ne 19){throw 'Slide/notes count invalid'}
+ if($slides.Count -ne 20 -or $notes.Count -ne 20){throw 'Slide/notes count invalid'}
  $reader=New-Object IO.StreamReader($zip.GetEntry('ppt/presentation.xml').Open());[xml]$presentationXml=$reader.ReadToEnd();$reader.Dispose()
  $reader=New-Object IO.StreamReader($zip.GetEntry('ppt/_rels/presentation.xml.rels').Open());[xml]$relationships=$reader.ReadToEnd();$reader.Dispose()
  $number=0
@@ -22,12 +22,12 @@ try{
   $target=($relationships.Relationships.Relationship | Where-Object {$_.Id -eq $id}).Target
   $entry=$zip.GetEntry('ppt/'+$target.TrimStart('/'))
   $reader=New-Object IO.StreamReader($entry.Open());[xml]$xml=$reader.ReadToEnd();$reader.Dispose()
-  if(($xml.DocumentElement.GetAttribute('show') -eq '0') -ne ($number -ge 16)){throw "Hidden XML state invalid: $number"}
+  if(($xml.DocumentElement.GetAttribute('show') -eq '0') -ne ($number -ge 17)){throw "Hidden XML state invalid: $number"}
  }
  $pdf=[Text.Encoding]::ASCII.GetString([IO.File]::ReadAllBytes((Join-Path $root 'GAZEBO_AND_KINEMATICS.pdf')))
  $pages=[regex]::Matches($pdf,'/Type\s*/Page(?!s)\b').Count
- if($pages -ne 19){throw "PDF page count: $pages"}
+ if($pages -ne 20){throw "PDF page count: $pages"}
  $validation=Get-Content (Join-Path $PSScriptRoot 'validation.json') -Raw | ConvertFrom-Json
  if($validation.layoutIssues.Count){throw 'Unresolved text overflow'}
- Write-Output 'ZIP: 19 slides and notes, 4 hidden; PDF: 19 pages; layout: no overflow.'
+ Write-Output 'ZIP: 20 slides and notes, 4 hidden; PDF: 20 pages; layout: no overflow.'
 }finally{$zip.Dispose()}
