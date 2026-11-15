@@ -13,10 +13,10 @@ $zip=[IO.Compression.ZipFile]::OpenRead((Join-Path $root 'CLASSICAL_PLANNING_AND
 try{
  $slides=@($zip.Entries | Where-Object {$_.FullName -match '^ppt/slides/slide\d+\.xml$'})
  $notes=@($zip.Entries | Where-Object {$_.FullName -match '^ppt/notesSlides/notesSlide\d+\.xml$'})
- if($slides.Count -ne 27 -or $notes.Count -ne 27){throw 'Slide/notes count invalid'}
+ if($slides.Count -ne 23 -or $notes.Count -ne 23){throw 'Slide/notes count invalid'}
  foreach($entry in $slides){
   $reader=New-Object IO.StreamReader($entry.Open());[xml]$xml=$reader.ReadToEnd();$reader.Dispose();$number=[int]([regex]::Match($entry.Name,'\d+').Value)
-  if(($xml.DocumentElement.GetAttribute('show') -eq '0') -ne ($number -ge 24)){throw "Hidden XML state invalid: $number"}
+  if(($xml.DocumentElement.GetAttribute('show') -eq '0') -ne $false){throw "Hidden XML state invalid: $number"}
   $ns=New-Object Xml.XmlNamespaceManager($xml.NameTable);$ns.AddNamespace('a','http://schemas.openxmlformats.org/drawingml/2006/main')
   $text=($xml.SelectNodes('//a:t',$ns) | ForEach-Object {$_.InnerText}) -join ' '
   if(-not $text.Contains($lesson[$number-1].title)){throw "Slide order/title differs from source: $number"}
@@ -28,9 +28,13 @@ try{
  }
  $pdf=[Text.Encoding]::ASCII.GetString([IO.File]::ReadAllBytes((Join-Path $root 'CLASSICAL_PLANNING_AND_TAMP.pdf')))
  $pages=[regex]::Matches($pdf,'/Type\s*/Page(?!s)\b').Count
- if($pages -ne 27){throw "PDF page count: $pages"}
+ if($pages -ne 23){throw "PDF page count: $pages"}
  $validation=Get-Content (Join-Path $PSScriptRoot 'validation.json') -Raw | ConvertFrom-Json
  if($validation.layoutIssues.Count){throw 'Unresolved text overflow'}
- [pscustomobject]@{slideCount=27;notesCount=27;hiddenCount=4;pdfPages=$pages;orderedTitlesMatch=$true;notesTimingsMatch=$true;notesSourcesMatch=$true;contactSheets=5;previewCount=$images.Count} | ConvertTo-Json | Set-Content (Join-Path $PSScriptRoot 'review.json') -Encoding UTF8
- Write-Output 'ZIP: 27 slides and notes, 4 hidden; PDF: 27 pages; layout: no overflow.'
+ if($images.Count -ne 23){throw 'Preview count invalid'}
+ if($validation.pddlMinutes -ne 15 -or $validation.tampMinutes -ne 15 -or $validation.totalMinutes -ne 45){throw 'Timing differs'}
+ $baseline=Get-Content (Join-Path $PSScriptRoot 'protected_files.json') -Raw | ConvertFrom-Json
+ foreach($property in $baseline.PSObject.Properties){if((Get-FileHash -LiteralPath (Join-Path $root $property.Name)).Hash -ne $property.Value){throw "Protected file changed: $($property.Name)"}}
+ [pscustomobject]@{slideCount=23;notesCount=23;hiddenCount=0;pdfPages=$pages;orderedTitlesMatch=$true;notesTimingsMatch=$true;notesSourcesMatch=$true;contactSheets=4;previewCount=$images.Count} | ConvertTo-Json | Set-Content (Join-Path $PSScriptRoot 'review.json') -Encoding UTF8
+ Write-Output 'ZIP: 23 slides and notes, 0 hidden; PDF: 23 pages; layout: no overflow.'
 }finally{$zip.Dispose()}

@@ -5,7 +5,6 @@ $planPath = Join-Path $root 'PRESENTATION_PLAN.md'
 $pptxPath = Join-Path $root ($OutputBaseName+'.pptx')
 $pdfPath = Join-Path $root ($OutputBaseName+'.pdf')
 $previewPath = Join-Path $PSScriptRoot 'preview'
-$plan = Get-Content -LiteralPath $planPath -Raw -Encoding UTF8
 . (Join-Path $PSScriptRoot 'content.ps1')
 $baseline = Get-Content (Join-Path $PSScriptRoot 'protected_files.json') -Raw | ConvertFrom-Json
 $protectedPaths = @($baseline.PSObject.Properties.Name)
@@ -56,16 +55,6 @@ function Tag([double]$x,[double]$y,[double]$w,[string]$text,[int]$fill=$C.paleBl
   Box $x $y $w 42 $fill
   Text ($x+12) ($y+7) ($w-24) 30 $text 24 $color $true
 }
-function NoteText([string]$s) {
-  $s=[regex]::Replace($s,'\[([^\]]+)\]\(([^)]+)\)','$1: $2')
-  $s=$s -replace '\*\*','' -replace '`','' -replace '(?m)^#{1,6}\s*',''
-  return $s.Trim()
-}
-function Section([string]$pattern) {
-  $m=[regex]::Match($plan,$pattern,[System.Text.RegularExpressions.RegexOptions]::Singleline)
-  if (-not $m.Success) { throw "Missing presentation-plan section: $pattern" }
-  return (NoteText $m.Groups[1].Value)
-}
 function NewSlide([string]$title,[string]$subtitle,[double]$minutes,[string]$notes,[bool]$backup=$false) {
   $script:slide=$presentation.Slides.Add($presentation.Slides.Count+1,12)
   $script:slide.FollowMasterBackground=0
@@ -81,7 +70,7 @@ function NewSlide([string]$title,[string]$subtitle,[double]$minutes,[string]$not
   $noteBody.Text=$notes
   $noteBody.Font.Name='Aptos'; $noteBody.Font.Size=12
   $script:slide.SlideShowTransition.AdvanceOnTime=0
-  $script:slides.Add([pscustomobject]@{number=$script:slide.SlideIndex; title=$title; minutes=$minutes; backup=$backup})
+  $script:slides.Add([pscustomobject]@{number=$script:slide.SlideIndex; title=$title; minutes=$minutes; part=$script:currentPart; backup=$backup})
 }
 function Formula([double]$x,[double]$y,[double]$w,[double]$h,[string]$value,[double]$size=32,[int]$color=$C.ink,[int]$align=1) {
   # Editable text with true superscript/subscript offsets, never a raster equation.
@@ -129,7 +118,7 @@ function Code([double]$x,[double]$y,[double]$w,[double]$h,[string]$label,[string
  Text ($x+18) ($y+48) ($w-36) ($h-55) $value.Trim() 24 $C.ink $false 1 'Consolas'
  # Highlight actual PDDL keywords without changing tokens or font size.
  $range=$script:slide.Shapes.Item($script:slide.Shapes.Count).TextFrame.TextRange
- foreach($match in [regex]::Matches($value.Trim(),':[a-z-]+|\band\b|\bnot\b')){$r=$range.Characters($match.Index+1,$match.Length);$r.Font.Color.RGB=$(if($match.Value -eq 'not'){$C.red}else{$C.blue});$r.Font.Bold=-1}
+ foreach($match in [regex]::Matches($range.Text,':[a-z-]+|\band\b|\bnot\b')){$r=$range.Characters($match.Index+1,$match.Length);$r.Font.Color.RGB=$(if($match.Value -eq 'not'){$C.red}else{$C.blue});$r.Font.Bold=-1}
 }
 function SceneXY([double[]]$p,[double]$x,[double]$y,[double]$side){return @(($x+$p[0]*$side/6),($y+$side-$p[1]*$side/6))}
 function Scene([double]$x,[double]$y,[double]$side,[string]$mode='initial'){
@@ -163,15 +152,15 @@ function Passage([double]$x,[double]$y,[double]$radius,[string]$label,[int]$colo
 
 $planLines=New-Object System.Collections.Generic.List[string]
 $planLines.Add('# Week 5 — Classical Planning, PDDL, and TAMP');$planLines.Add('')
-$planLines.Add('Teach practical PDDL reading from scratch, then clearly separate TAMP and geometric feedback. **30 minutes presentation (20 PDDL + 10 TAMP), 10 minutes demo, 5 minutes questions/recap.** 27 slides, including four hidden backups. Use English, 16:9, light background, blue/teal accents, editable diagrams and readable code. Do not teach requirement flags, dialects or advanced language details. Preserve the demo, README, and teaching notes.')
+$planLines.Add('Explain why compact factored models and PDDL are useful, teach practical PDDL reading from scratch, then center TAMP on Ronen slides 8 and 9. **15 minutes classical planning/PDDL + 15 minutes TAMP + 10 minutes unchanged demo + 5 minutes recap = 45 minutes.** 23 visible slides with no hidden slides. English, 16:9, light background, editable diagrams/code. No PDB or related heuristic-abstraction content. All demo files and the original teaching notes remain unchanged; see TEACHING_NOTES_UPDATED.md for the current session guide.')
 $planLines.Add('');$planLines.Add('## Sequence and timing');$planLines.Add('');$planLines.Add('| Slide | Topic | Minutes |');$planLines.Add('|---|---|---:|')
 for($idx=0;$idx -lt $lesson.Count;$idx++){$item=$lesson[$idx];$planLines.Add("| $($idx+1) | $($item.title)$(if($item.backup){' (hidden)'}) | $($item.minutes) |")}
 $planLines.Add('');$planLines.Add('## Speaker guidance, visuals, and code reading')
-for($idx=0;$idx -lt $lesson.Count;$idx++){$item=$lesson[$idx];$planLines.Add('');$planLines.Add("### $($idx+1). $($item.title)");$planLines.Add('');$planLines.Add("$($item.subtitle) Timing: $($item.minutes) minutes.");$planLines.Add('');$planLines.Add($item.notes.Trim());$planLines.Add('');foreach($ref in $item.refs){$planLines.Add("- $($sources[$ref])")}}
+for($idx=0;$idx -lt $lesson.Count;$idx++){$item=$lesson[$idx];$planLines.Add('');$planLines.Add("### $($idx+1). $($item.title)");$planLines.Add('');$planLines.Add("$($item.subtitle) Timing: $($item.minutes) minutes.");$planLines.Add('');$planLines.Add($item.notes.Trim());$planLines.Add('');if($item.kind -eq 'response_table'){$planLines.Add('| Response | Meaning | Example |');$planLines.Add('|---|---|---|');foreach($response in $tampResponses){$planLines.Add(('| {0} | {1} | {2} |' -f ($response.response -replace '[\r\n]+',' '),($response.meaning -replace '[\r\n]+',' '),($response.example -replace '[\r\n]+',' ')))};$planLines.Add('')};foreach($ref in $item.refs){$planLines.Add("- $($sources[$ref])")}}
 $planLines.Add('');$planLines.Add('## Source excerpts');$planLines.Add('')
-foreach($key in @('predicate','fact','types','objects','init','goal','pickhead','pickeffect','loadedpre','moveeffect','permission','emptypermission','reversepermission','place')){$excerpt=$snippets[$key];$planLines.Add("### $key — demo/$($excerpt.file)");$planLines.Add('');$planLines.Add('```lisp');$planLines.Add($excerpt.code.Trim());$planLines.Add('```');$planLines.Add('')}
+foreach($key in ($snippets.Keys | Sort-Object)){$excerpt=$snippets[$key];$planLines.Add("### $key — demo/$($excerpt.file)");$planLines.Add('');$planLines.Add('```lisp');$planLines.Add($excerpt.code.Trim());$planLines.Add('```');$planLines.Add('')}
 $planLines.Add('## Validation');$planLines.Add('')
-$planLines.Add('All 14 original Week 5 files read; no separate professor presentation was supplied. Check 27 PowerPoint renders, saved-deck reopen, note timings/sources, four hidden slides, 27 PDF pages, readable text and all 13 protected-file SHA256 hashes. PDDL excerpt token sequences must match authored files. Independent C# parsing/grounding/BFS and geometry checks reproduce the four/six-action sequences, third-action failure, exact permission removal, state changes and contact/boundary behavior. This independent checker is scoped to the demo and is not Pyperplan execution. Python is unavailable locally, so the existing ten Python test methods, headless trace and GUI/classroom rehearsal are not run here. Distinguish these checks from historical TA-machine validation. See slides/README.md, validation.json and review.json for reproducible commands and evidence.')
+$planLines.Add('Check all 23 rendered/exported pages, 23 visible slides, no hidden slides, notes/timings/lecture citations, and unchanged hashes for all 13 protected files. Authored PDDL excerpts are compared by tokens; the independent C# checker reproduces the four/six-action plans, exact rejection/refinement, and geometry. Actual Python-suite/headless results are recorded separately in slides/python_validation.json. Rendered contact sheets receive visual review. No classroom rehearsal or live hardware execution is claimed.')
 [IO.File]::WriteAllText($planPath,($planLines -join "`r`n"),[Text.UTF8Encoding]::new($false))
 
 $app=$null;$presentation=$null;$hadExistingPresentations=$true
@@ -183,179 +172,25 @@ try{
   $refs=($item.refs | ForEach-Object {$sources[$_]}) -join "`r`n"
   $notes="TIMING: $($item.minutes) minutes. $($item.notes.Trim())`r`n`r`nSOURCES`r`n$refs"
   NewSlide $item.title $item.subtitle $item.minutes $notes ([bool]$item.backup)
-  switch($item.kind){
-   'title' {
-    Card 54 211 410 199 'Part 1 · Read PDDL' 'Facts → actions → a task plan'
-    Card 486 211 420 199 'Part 2 · Connect motion' 'Geometry → feedback → TAMP' $C.paleTeal $C.teal
-    Text 54 451 852 37 '30 min presentation · 10 min demo · 5 min recap' 26 $C.muted $true
-   }
-   'part1' {
-    Text 54 214 852 59 'Read facts. Understand actions. Predict a plan.' 32 $C.blue $true
-    Tag 54 309 246 'State';Tag 356 309 246 'Action';Tag 660 309 246 'Goal'
-    Line 306 330 347 330 $C.blue $true;Line 608 330 651 330 $C.blue $true
-    Text 54 431 852 45 '20 minutes · read the demo PDDL files' 28 $C.muted
-   }
-   'classical' {
-    Card 54 211 246 185 'Initial state' 'Robot at delivery; parcel at pickup.'
-    Card 357 211 246 185 'Actions' 'Move, pick, move, place.' $C.paleTeal $C.teal
-    Card 660 211 246 185 'Goal' 'Parcel at delivery.'
-    Line 307 298 349 298 $C.blue $true;Line 609 298 651 298 $C.teal $true
-    Text 54 438 852 42 'Known state · deterministic outcomes · discrete actions' 26 $C.muted
-   }
-   'facts' {
-    Code 54 211 518 113 'Predicate declaration · domain.pddl' $snippets.predicate.code
-    Code 54 349 518 113 'Concrete fact · problem.pddl' $snippets.fact.code $C.paleTeal
-    Text 616 221 290 72 'A pattern with a location placeholder.' 26 $C.blue $true
-    Text 616 359 290 92 'A statement about one actual location.' 26 $C.teal $true
-   }
-   'goal' {
-    Code 54 211 852 116 'Goal excerpt · problem.pddl' $snippets.goal.code
-    Card 54 351 410 131 'Initially true' 'Robot at delivery; hand empty.'
-    Card 486 351 420 131 'Initially false' 'Holding parcel; parcel at delivery.' $C.paleTeal $C.teal
-   }
-   'domain' {
-    Card 54 211 410 217 'domain.pddl' "Vocabulary`nAction rules`nReusable model"
-    Card 486 211 420 217 'problem.pddl' "Objects`nInitial facts + goal`nOne delivery instance" $C.paleTeal $C.teal
-    Text 54 451 852 35 'PDDL describes the task. Pyperplan searches for a plan.' 26 $C.muted $true
-   }
-   'objects' {
-    Code 54 201 664 106 'Types excerpt · domain.pddl' $snippets.types.code
-    Code 54 325 664 157 'Objects excerpt · problem.pddl' $snippets.objects.code $C.paleTeal
-    Text 744 213 162 93 'parcel: a package object' 25 $C.blue $true
-    Text 744 344 162 134 "?p: variable`n-: type label" 25 $C.teal $true
-   }
-   'initial' {
-    Code 54 201 520 199 'Initial facts · opening excerpt' $snippets.init.code
-    Box 54 412 590 70 $C.paleTeal;Text 72 417 554 30 'Goal excerpt' 24 $C.muted $true;Text 72 450 554 32 $snippets.goal.code 24 $C.teal $false 1 'Consolas'
-    Scene 651 209 245
-   }
-   'anatomy' {
-    Card 54 207 272 171 'Parameters' 'Which package and location?'
-    Card 344 207 272 171 'Preconditions' 'What must be true before?' $C.paleTeal $C.teal
-    Card 634 207 272 171 'Effects' 'What changes afterward?'
-    Tag 54 411 195 'move-empty';Tag 273 411 195 'move-loaded';Tag 492 411 195 'pick';Tag 711 411 195 'place'
-   }
-   'pick' {
-    Code 54 201 636 269 'pick excerpt · domain.pddl' $snippets.pickhead.code
-    Text 708 216 198 90 'Robot and parcel together.' 26 $C.blue $true
-    Text 718 325 188 67 'Hand empty.' 26 $C.teal $true
-    Text 718 416 188 59 'and = all three' 24 $C.muted
-   }
-   'effects' {
-    Code 54 199 852 178 'pick effects excerpt · domain.pddl' $snippets.pickeffect.code
-    Text 54 389 407 32 'Before pick · at pickup' 24 $C.blue $true
-    Text 500 389 406 32 'After pick' 24 $C.teal $true
-    Text 54 430 407 59 "(package-at parcel pickup)`n(hand-empty)" 24 $C.red $false 1 'Consolas'
-    Text 500 430 406 59 "(holding parcel)`nkept: (robot-at pickup)" 24 $C.teal $false 1 'Consolas'
-   }
-   'loaded' {
-    Code 54 205 450 211 'move-loaded · preconditions' $snippets.loadedpre.code
-    Code 522 205 384 211 'Same action · effects' $snippets.moveeffect.code
-    Text 54 440 852 43 'Holding persists; only the robot location changes.' 27 $C.teal $true
-   }
-   'grounding' {
-    Code 54 209 410 111 'Schema pattern' '(pick ?p ?l)'
-    Code 486 209 420 111 'Grounded instance' '(pick parcel pickup)' $C.paleTeal
-    Line 468 271 483 271 $C.blue $true
-    Card 54 351 410 131 'Initially' 'Exists, but is not applicable.'
-    Card 486 351 420 131 'After the empty move' 'Its preconditions now hold.' $C.paleTeal $C.teal
-   }
-   'search' {
-    PlanList $candidate 54 205 852 -1 47
-    $labels=@('Initial','At pickup','Holding','At delivery','Delivered')
-    for($idx=0;$idx -lt 5;$idx++){$xx=54+$idx*173;Box $xx 414 160 49 $C.paleBlue;Text ($xx+8) 425 144 33 $labels[$idx] 24 $C.blue $true 2;if($idx -lt 4){Line ($xx+162) 439 ($xx+169) 439 $C.blue $true}}
-   }
-   'part2' {
-    Text 54 211 852 57 'Task and Motion Planning' 36 $C.teal $true
-    Card 54 302 410 150 'Symbolic task' 'What should happen?'
-    Card 486 302 420 150 'Geometric motion' 'Can it happen in this scene?' $C.paleTeal $C.teal
-   }
-   'connect' {
-    Card 54 211 372 177 'Task level' "Named locations`nPossession + actions"
-    Card 534 211 372 177 'Motion level' "Coordinates + footprint`nCollision-free motion" $C.paleTeal $C.teal
-    Line 442 303 518 303 $C.teal $true $false $true
-    Text 54 432 852 53 'PRM can support motion queries. This demo checks straight segments.' 26 $C.muted
-   }
-   'failure' {
-    PlanList $candidate 54 207 594 2 43
-    Tag 54 409 455 'Candidate only · not executed' $C.paleAmber $C.amber
-    Text 54 464 455 29 'Third action fails geometric validation.' 24 $C.red $true
-    Scene 671 226 210 'rejected'
-   }
-   'footprints' {
-    Passage 54 211 .12 'Empty · diameter 0.24 m' $C.teal
-    Passage 516 211 .25 'Loaded · diameter 0.50 m' $C.red
-    Text 54 463 852 31 'Gap: 0.40 m   |   Centerline clearance: 0.20 m' 26 $C.muted $true
-   }
-   'loop' {
-    Tag 54 214 255 'Symbolic search';Tag 360 214 240 'Candidate';Tag 651 214 255 'Geometric check' $C.paleTeal $C.teal
-    Line 315 235 350 235 $C.blue $true;Line 606 235 641 235 $C.blue $true
-    Tag 651 322 255 'Execute if valid' $C.paleTeal $C.teal;Line 777 262 777 312 $C.teal $true
-    Tag 54 322 406 'Refine permission if rejected' $C.paleAmber $C.amber
-    Line 658 271 468 340 $C.red $true;Line 177 316 177 265 $C.amber $true
-    Text 54 432 852 46 'Hypothetical checking; replan from the original initial state.' 26 $C.muted $true
-   }
-   'refine' {
-    Code 54 202 852 86 'REMOVE · one loaded direction' $snippets.permission.code $C.pink
-    Code 54 300 852 86 'KEEP · empty shortcut' $snippets.emptypermission.code $C.paleTeal
-    Code 54 398 852 86 'KEEP · reverse permission' $snippets.reversepermission.code $C.paleTeal
-   }
-   'revised' {
-    Scene 54 207 276 'revised'
-    Text 384 210 522 274 "1 (move-empty delivery pickup)`n2 (pick parcel pickup)`n3 (move-loaded parcel pickup`n   upper-left)`n4 (move-loaded parcel upper-left`n   upper-right)`n5 (move-loaded parcel upper-right`n   delivery)`n6 (place parcel delivery)" 24 $C.ink $false 1 'Consolas'
-   }
-   'stages' {
-    Card 54 211 272 211 'Plan' 'Propose actions from symbolic facts.'
-    Card 344 211 272 211 'Validate' 'Check motions in a hypothetical state.' $C.paleTeal $C.teal
-    Card 634 211 272 211 'Execute' 'Animate only the validated plan.'
-    Text 54 449 852 42 'Facts update when an action finishes.' 27 $C.teal $true
-   }
-   'demo' {
-    [void]$script:slide.Shapes.AddPicture((Join-Path $root 'demo/rejected.png'),0,-1,54,208,470,274.17)
-    Text 598 214 308 59 'Predict the failure.' 28 $C.blue $true
-    Text 598 306 308 86 'Inspect the refinement.' 28 $C.teal $true
-    Text 598 420 308 68 '10 min demo + 5 min recap' 27 $C.muted $true
-   }
-   'place' {
-    Code 54 201 852 269 'Complete action · domain.pddl' $snippets.place.code
-   }
-   'state_backup' {
-    Formula 54 209 852 57 'S_{next} = (S ∖ Delete) ∪ Add' 36 $C.blue
-    Formula 54 288 852 57 'Preconditions ⊆ S' 34 $C.teal
-    Card 54 364 410 118 'Grounding' 'Substitute concrete objects.'
-    Card 486 364 420 118 'BFS' 'Search by action count.' $C.paleTeal $C.teal
-   }
-   'geometry_backup' {
-    Formula 54 210 852 58 'min_{s∈[0,1]} distance((1−s)a + sb, wall) > radius' 31 $C.blue
-    Text 54 302 852 40 'Shortcut: 0.20 m clearance' 30 $C.ink $true
-    Card 54 371 410 111 'Empty radius: 0.12 m' 'Passes.' $C.paleTeal $C.teal
-    Card 486 371 420 111 'Loaded radius: 0.25 m' 'Fails; contact also fails.' $C.pink $C.red
-   }
-   'limits' {
-    Card 54 211 272 225 'Symbolic failure' 'No plan with the remaining connections.'
-    Card 344 211 272 225 'Geometric failure' 'A candidate footprint or motion is blocked.' $C.paleTeal $C.teal
-    Card 634 211 272 225 'Broader TAMP' 'Search grasps, poses, placements, and paths.'
-    Text 54 453 852 35 '16 permissions → at most 17 searches in this finite demo.' 25 $C.muted
-   }
-  }
+  . (Join-Path $PSScriptRoot 'layouts.ps1')
  }
- if($presentation.Slides.Count -ne 27){throw 'Expected 27 slides'}
- $pddl=($script:slides | Where-Object {$_.number -ge 2 -and $_.number -le 14} | Measure-Object minutes -Sum).Sum
- $tamp=($script:slides | Where-Object {$_.number -ge 15 -and $_.number -le 22} | Measure-Object minutes -Sum).Sum
- if($pddl -ne 20 -or $tamp -ne 10 -or ($script:slides | Measure-Object minutes -Sum).Sum -ne 45){throw 'Timing differs'}
+ if($presentation.Slides.Count -ne 23){throw 'Expected 23 slides'}
+ $pddl=($script:slides | Where-Object {$_.part -eq 1} | Measure-Object minutes -Sum).Sum
+ $tamp=($script:slides | Where-Object {$_.part -eq 2} | Measure-Object minutes -Sum).Sum
+ if($pddl -ne 15 -or $tamp -ne 15 -or ($script:slides | Measure-Object minutes -Sum).Sum -ne 45){throw 'Timing differs'}
  foreach($item in $presentation.Slides){foreach($shape in $item.Shapes){if($shape.HasTextFrame -eq -1 -and $shape.TextFrame.HasText -eq -1){$tr=$shape.TextFrame.TextRange;if($tr.BoundHeight -gt $shape.Height+2 -or $tr.BoundWidth -gt $shape.Width+2){$script:issues.Add("Slide $($item.SlideIndex): $([math]::Round($tr.BoundWidth,1))×$([math]::Round($tr.BoundHeight,1)) exceeds $($shape.Width)×$($shape.Height): $($tr.Text)")}}}}
  New-Item -ItemType Directory -Path $previewPath -Force | Out-Null
- if(-not $NoPreview){foreach($item in $presentation.Slides){$item.Export((Join-Path $previewPath ('slide_{0:00}.png' -f $item.SlideIndex)),'PNG',1600,900)}}
+ if(-not $NoPreview){Get-ChildItem -LiteralPath $previewPath -File | Where-Object {$_.Name -match '^(slide|contact)_\d+\.png$'} | ForEach-Object {Remove-Item -LiteralPath $_.FullName};foreach($item in $presentation.Slides){$item.Export((Join-Path $previewPath ('slide_{0:00}.png' -f $item.SlideIndex)),'PNG',1600,900)}}
  $presentation.SaveAs($pdfPath,32)
  foreach($info in $script:slides){if($info.backup){$presentation.Slides.Item($info.number).SlideShowTransition.Hidden=-1}}
  $presentation.SaveAs($pptxPath,24);$presentation.Close();$presentation=$null
  $check=$app.Presentations.Open($pptxPath,-1,0,0)
- if($check.Slides.Count -ne 27){throw 'Reopened count differs'}
- for($idx=1;$idx -le 27;$idx++){$item=$check.Slides.Item($idx);if(($item.SlideShowTransition.Hidden -eq -1) -ne ($idx -ge 24)){throw "Hidden state differs: $idx"};if($item.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text.Length -lt 100){throw "Missing notes: $idx"}}
+ if($check.Slides.Count -ne 23){throw 'Reopened count differs'}
+ for($idx=1;$idx -le 23;$idx++){$item=$check.Slides.Item($idx);if(($item.SlideShowTransition.Hidden -eq -1) -ne $false){throw "Hidden state differs: $idx"};if($item.NotesPage.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text.Length -lt 100){throw "Missing notes: $idx"}}
  $check.Close()
  foreach($path in $protectedPaths){if((Get-FileHash (Join-Path $root $path)).Hash -ne $protectedHashes[$path]){throw "Protected file changed: $path"}}
- [pscustomobject]@{slides=$script:slides;totalMinutes=45;presentationMinutes=30;pddlMinutes=20;tampMinutes=10;demoMinutes=10;recapMinutes=5;slideWidth=$W;slideHeight=$H;layoutIssues=$script:issues;protectedFiles=$protectedHashes;independentChecks=$lessonChecks;excerptChecks=$excerptChecks;sourceChecks=$sourceChecks;pythonSuiteRun=$false;pythonLimitation='Python unavailable; independent C# checks are not Pyperplan or GUI execution.'} | ConvertTo-Json -Depth 7 | Set-Content (Join-Path $PSScriptRoot 'validation.json') -Encoding UTF8
- Write-Output 'Created/reopened 27 slides, four hidden backups, notes on every slide. All 13 protected files unchanged.'
+ [pscustomobject]@{slides=$script:slides;totalMinutes=45;presentationMinutes=30;pddlMinutes=15;tampMinutes=15;demoMinutes=10;recapMinutes=5;slideWidth=$W;slideHeight=$H;layoutIssues=$script:issues;protectedFiles=$protectedHashes;independentChecks=$lessonChecks;excerptChecks=$excerptChecks;sourceChecks=$sourceChecks;pythonVerification='Actual Python results: python_validation.json; independent C# checks are separate.'} | ConvertTo-Json -Depth 7 | Set-Content (Join-Path $PSScriptRoot 'validation.json') -Encoding UTF8
+ Write-Output 'Created/reopened 23 slides, no hidden slides, notes on every slide. All 13 protected files unchanged.'
  if($script:issues.Count){$script:issues | ForEach-Object {Write-Output $_}}else{Write-Output 'No text overflow detected.'}
 }finally{
  if($null -ne $presentation){try{$presentation.Close()}catch{}}

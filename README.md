@@ -21,7 +21,7 @@ if it is private. PowerPoint files may need to be downloaded to open.
 | 2 | Coordinate transforms and tf2 | [PDF](week02_tf/TF_COORDINATE_TRANSFORMS_UPDATED.pdf) · [PowerPoint](week02_tf/TF_COORDINATE_TRANSFORMS_UPDATED.pptx) | [Notes](week02_tf/TEACHING_NOTES.md) · [Updated deck guide](week02_tf/slides/README.md) · [Original plan](week02_tf/PRESENTATION_PLAN.md) | [Python/RViz](week02_tf/demo/README.md) |
 | 3 | Gazebo and robot kinematics | [PDF](week03_kinematics/GAZEBO_AND_KINEMATICS.pdf) · [PowerPoint](week03_kinematics/GAZEBO_AND_KINEMATICS.pptx) | [Notes](week03_kinematics/TEACHING_NOTES.md) · [Plan](week03_kinematics/PRESENTATION_PLAN.md) | [Two-joint arm](week03_kinematics/demo/README.md) |
 | 4 | Configuration space and PRM | [PDF](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pdf) · [PowerPoint](week04_motion_planning/CONFIGURATION_SPACE_AND_PRM.pptx) | [Notes](week04_motion_planning/TEACHING_NOTES.md) · [Plan](week04_motion_planning/PRESENTATION_PLAN.md) | [Interactive planning](week04_motion_planning/demo/README.md) |
-| 5 | Classical planning and task-and-motion planning | [PDF](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pdf) · [PowerPoint](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pptx) | [Notes](week05_task_motion_planning/TEACHING_NOTES.md) · [Plan](week05_task_motion_planning/PRESENTATION_PLAN.md) | [Delivery planning](week05_task_motion_planning/demo/README.md) |
+| 5 | Classical planning and task-and-motion planning | [PDF](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pdf) · [PowerPoint](week05_task_motion_planning/CLASSICAL_PLANNING_AND_TAMP.pptx) | [Notes](week05_task_motion_planning/TEACHING_NOTES_UPDATED.md) · [Plan](week05_task_motion_planning/PRESENTATION_PLAN.md) | [Delivery planning](week05_task_motion_planning/demo/README.md) |
 | 6 | MDPs: from actions to policies | [PDF](week06_mdps/MARKOV_DECISION_PROCESSES.pdf) · [PowerPoint](week06_mdps/MARKOV_DECISION_PROCESSES.pptx) | [Notes](week06_mdps/TEACHING_NOTES.md) · [Plan](week06_mdps/PRESENTATION_PLAN.md) | [Bellman backups](week06_mdps/demo/README.md) |
 | 7 | Imitation learning in MuJoCo | [PDF](week07_imitation_learning/MUJOCO_AND_IMITATION_LEARNING.pdf) · [PowerPoint](week07_imitation_learning/MUJOCO_AND_IMITATION_LEARNING.pptx) | [Notes](week07_imitation_learning/TEACHING_NOTES.md) · [Plan](week07_imitation_learning/PRESENTATION_PLAN.md) | [Expert-to-learner](week07_imitation_learning/demo/README.md) |
 | 8 | Q-learning | [PDF](week08_q_learning/Q_LEARNING.pdf) · [PowerPoint](week08_q_learning/Q_LEARNING.pptx) | [Notes](week08_q_learning/TEACHING_NOTES.md) · [Plan](week08_q_learning/PRESENTATION_PLAN.md) | [Interactive Gridworld](week08_q_learning/demo/README.md) |
@@ -35,6 +35,10 @@ Its reference PDF includes all 20 slides. The original `ROS_BASICS` and
 Week 2 links use the updated deck: 18 visible slides, no hidden slides, and a
 matching 18-page PDF. The original presentation files are retained. See the
 [transform mathematics reference](week02_tf/TF_MATH_REFERENCE.md) for additional detail.
+
+Week 5 uses the revised deck: 23 visible slides, no hidden slides, with
+15 minutes PDDL, 15 minutes TAMP, 10 minutes demo, and 5 minutes recap. Its PDF
+includes all 23 pages. The delivery demo is unchanged.
 
 ## Planned sessions
 

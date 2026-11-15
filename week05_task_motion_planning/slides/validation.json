@@ -2,171 +2,170 @@
     "slides":  [
                    {
                        "number":  1,
-                       "title":  "Classical planning \u0026 TAMP",
-                       "minutes":  0,
+                       "title":  "Classical planning → TAMP",
+                       "minutes":  0.5,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  2,
-                       "title":  "Part 1 · Classical planning \u0026 PDDL",
-                       "minutes":  0.5,
+                       "title":  "From paths to action sequences",
+                       "minutes":  1,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  3,
-                       "title":  "What is classical planning?",
-                       "minutes":  1.5,
+                       "title":  "Why factor the planning model?",
+                       "minutes":  2,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  4,
-                       "title":  "States, predicates, and facts",
-                       "minutes":  1.5,
+                       "title":  "States are collections of facts",
+                       "minutes":  1,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  5,
-                       "title":  "Goals and the closed-world model",
-                       "minutes":  1.5,
+                       "title":  "Why PDDL? Two files, one model",
+                       "minutes":  1,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  6,
-                       "title":  "PDDL: domain versus problem",
+                       "title":  "Read names, types, and variables",
                        "minutes":  1,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  7,
-                       "title":  "Objects, types, and variables",
+                       "title":  "Read the delivery problem",
                        "minutes":  1.5,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  8,
-                       "title":  "Read the initial state and goal",
-                       "minutes":  1.5,
+                       "title":  "Read one complete action: pick",
+                       "minutes":  2,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  9,
-                       "title":  "Anatomy of an action",
-                       "minutes":  1.5,
+                       "title":  "Ground the action; update the facts",
+                       "minutes":  2,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  10,
-                       "title":  "When can we pick?",
-                       "minutes":  2,
+                       "title":  "Read a loaded move",
+                       "minutes":  1.5,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  11,
-                       "title":  "What changes after picking?",
-                       "minutes":  2.5,
+                       "title":  "From PDDL to a symbolic plan",
+                       "minutes":  1.5,
+                       "part":  1,
                        "backup":  false
                    },
                    {
                        "number":  12,
-                       "title":  "Read a loaded move",
+                       "title":  "Part 2 · What does an action hide?",
                        "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  13,
-                       "title":  "From variables to a concrete action",
+                       "title":  "Geometry can change the task",
                        "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  14,
-                       "title":  "Search symbolic states",
-                       "minutes":  2,
+                       "title":  "The main TAMP feedback loop",
+                       "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  15,
-                       "title":  "Part 2 · Task and motion planning",
-                       "minutes":  0.5,
+                       "title":  "Three responses to geometric failure",
+                       "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  16,
-                       "title":  "What does TAMP connect?",
-                       "minutes":  1,
+                       "title":  "Three ways to organize TAMP",
+                       "minutes":  3,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  17,
-                       "title":  "A symbolic plan can fail geometrically",
-                       "minutes":  1.5,
+                       "title":  "Find the loop in our demo",
+                       "minutes":  1,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  18,
-                       "title":  "Empty fits; loaded does not",
+                       "title":  "Predict the failed action",
                        "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  19,
-                       "title":  "The task-and-motion loop",
-                       "minutes":  2,
+                       "title":  "Turn rejection into useful feedback",
+                       "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  20,
-                       "title":  "Refine precisely",
-                       "minutes":  1,
+                       "title":  "The revised six-action plan",
+                       "minutes":  1.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  21,
-                       "title":  "The revised six-action plan",
-                       "minutes":  1.5,
+                       "title":  "From this example to broader TAMP",
+                       "minutes":  0.5,
+                       "part":  2,
                        "backup":  false
                    },
                    {
                        "number":  22,
-                       "title":  "Planning, validation, and execution",
-                       "minutes":  1,
+                       "title":  "Demo: follow the model into execution",
+                       "minutes":  10,
+                       "part":  0,
                        "backup":  false
                    },
                    {
                        "number":  23,
-                       "title":  "Demo: predict, reject, revise, execute",
-                       "minutes":  15,
+                       "title":  "Explain the complete story",
+                       "minutes":  5,
+                       "part":  0,
                        "backup":  false
-                   },
-                   {
-                       "number":  24,
-                       "title":  "Reading place",
-                       "minutes":  0,
-                       "backup":  true
-                   },
-                   {
-                       "number":  25,
-                       "title":  "State updates and symbolic search",
-                       "minutes":  0,
-                       "backup":  true
-                   },
-                   {
-                       "number":  26,
-                       "title":  "Swept-disk geometry",
-                       "minutes":  0,
-                       "backup":  true
-                   },
-                   {
-                       "number":  27,
-                       "title":  "Failure meanings and broader TAMP",
-                       "minutes":  0,
-                       "backup":  true
                    }
                ],
     "totalMinutes":  45,
     "presentationMinutes":  30,
-    "pddlMinutes":  20,
-    "tampMinutes":  10,
+    "pddlMinutes":  15,
+    "tampMinutes":  15,
     "demoMinutes":  10,
     "recapMinutes":  5,
     "slideWidth":  960,
@@ -209,15 +208,14 @@
                           "place",
                           "permission",
                           "loadedpre",
+                          "pick",
                           "goal",
                           "fact",
                           "predicate",
                           "types",
-                          "pickeffect",
                           "objects",
                           "emptypermission",
                           "reversepermission",
-                          "pickhead",
                           "moveeffect",
                           "init"
                       ],
@@ -228,6 +226,5 @@
                          "range(len(permissions)+1)",
                          "task = load_task(refine_problem(original,rejected))"
                      ],
-    "pythonSuiteRun":  false,
-    "pythonLimitation":  "Python unavailable; independent C# checks are not Pyperplan or GUI execution."
+    "pythonVerification":  "Actual Python results: python_validation.json; independent C# checks are separate."
 }

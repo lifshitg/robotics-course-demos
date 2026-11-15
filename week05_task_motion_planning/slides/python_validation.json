@@ -1,0 +1,31 @@
+{
+  "suite": {
+    "command": [
+      "C:\\Users\\gilad\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "week05_task_motion_planning\\demo",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "test_distances_and_boundaries (test_demo.GeometryTests.test_distances_and_boundaries) ... ok\ntest_invalid_scene_and_motion (test_demo.GeometryTests.test_invalid_scene_and_motion) ... ok\ntest_shortcut_depends_on_load (test_demo.GeometryTests.test_shortcut_depends_on_load) ... ok\ntest_stages_execution_and_reset (test_demo.InterfaceTests.test_stages_execution_and_reset) ... ok\ntest_expected_plans_and_refinement (test_demo.PlanningTests.test_expected_plans_and_refinement) ... ok\ntest_failures_and_finite_bound (test_demo.PlanningTests.test_failures_and_finite_bound) ... ok\ntest_growth_at_pick_is_checked (test_demo.PlanningTests.test_growth_at_pick_is_checked) ... ok\ntest_pddl_preconditions_and_effects (test_demo.PlanningTests.test_pddl_preconditions_and_effects) ... ok\ntest_validated_states_and_dense_route_check (test_demo.PlanningTests.test_validated_states_and_dense_route_check) ... ok\ntest_validation_is_hypothetical_and_authored_problem_unchanged (test_demo.PlanningTests.test_validation_is_hypothetical_and_authored_problem_unchanged) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 5.526s\n\nOK\n"
+  },
+  "headless": {
+    "command": [
+      "C:\\Users\\gilad\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "week05_task_motion_planning\\demo\\demo.py",
+      "--headless"
+    ],
+    "exitCode": 0,
+    "stdout": "Candidate 1: 4 actions\n  1. (move-empty delivery pickup)\n  2. (pick parcel pickup)\n  3. (move-loaded parcel pickup delivery)\n  4. (place parcel delivery)\n  REJECT action 3: Wall 1: centerline clearance 0.200 m <= radius 0.250 m.\n  Footprint radius: 0.25; remove only (can-loaded pickup delivery)\nCandidate 2: 6 actions\n  1. (move-empty delivery pickup)\n  2. (pick parcel pickup)\n  3. (move-loaded parcel pickup upper-left)\n  4. (move-loaded parcel upper-left upper-right)\n  5. (move-loaded parcel upper-right delivery)\n  6. (place parcel delivery)\n  VALID: Every action is geometrically valid.\nsuccess: Validated plan found.\n",
+    "stderr": ""
+  },
+  "protectedFilesUnchanged": true,
+  "interactiveClassroomRehearsal": false,
+  "backend": "Agg (includes existing interface/playback regression test; no interactive GUI rehearsal)"
+}

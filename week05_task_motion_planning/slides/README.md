@@ -1,41 +1,78 @@
 # Week 5 slide sources
 
-27 editable 16:9 slides: title, two section dividers, nineteen teaching slides, demo transition, and four hidden backups. The PDF includes all 27 pages for review. Notes carry detailed explanations and primary references. Timing is **20 minutes PDDL + 10 minutes TAMP + 10 minutes demo + 5 minutes questions/recap**. Language flags, dialects and advanced syntax are intentionally not taught.
+**23 editable 16:9 slides, all presented; no hidden slides.**
+The PDF includes all 23 pages. Timing is **15 minutes classical planning/PDDL +
+15 minutes TAMP + 10 minutes unchanged demo + 5 minutes recap = 45 minutes**.
 
-## Reproduce
+The lesson begins with the motivation for factored representations and PDDL:
+implicit search still needs a compact model; facts and reusable action schemas
+specify states and local transitions without listing the whole graph. Compact
+representation does not eliminate a potentially exponential search space.
+Slide 15 adds a response/meaning/example table after the TAMP loop; the previous
+architecture slide is now slide 16. The loop and table share three minutes.
+The second part centers Ronen's feedback loop and three TAMP architectures
+(numbered slides 8 and 9, supplied PDF pages 12 and 13). No pattern-database or
+related heuristic-abstraction material is taught, and no hidden references remain.
 
-Requires Windows PowerShell, installed Microsoft PowerPoint and .NET `Add-Type`. From the repository root:
+## Build and review
+
+Requires Windows PowerShell and installed Microsoft PowerPoint:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File week05_task_motion_planning/slides/build_slides.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File week05_task_motion_planning/slides/review_slides.ps1
 ```
 
-The build overwrites the Week 5 PPTX, PDF, presentation plan, previews and validation record. It opens/closes its own presentations and preserves an existing PowerPoint session. No Python, ROS or Gazebo is required for slide generation.
+The builder overwrites the Week 5 PPTX, PDF, generated presentation plan, numbered
+previews, and validation record. It creates/closes its own presentations while
+preserving an existing PowerPoint session. Windows Office automation may require
+the interactive user's logon context. The checked-in lecture illustration means
+no Python/PDF library is required for normal deck generation.
 
-- `content.ps1`: lesson order, timing, notes, source links, action sequences and PDDL excerpts.
-- `build_slides.ps1`: native diagrams, editable code with colored keywords, presentation plan generation, PowerPoint export/reopen, text bounds, source checks and hashes.
-- `LessonChecks.cs`: independent checker scoped to this demo. It reads the authored PDDL, grounds the actions, uses BFS, traces effects and validates candidate/refined motions against the exact scene. It is not Pyperplan or a general PDDL implementation.
-- `review_slides.ps1`: contact sheets, ZIP slide/note/hidden-state checks, note timings/source links, PDF page count and layout checks.
-- `protected_files.json`: original SHA256 hashes for teaching notes and all 12 demo files; do not refresh the baseline to conceal changes.
-- `validation.json` and `review.json`: generated evidence and limitations.
+- `content.ps1`: lesson order, exact timing, speaker notes, lecture slide/PDF-page
+  references, actual PDDL excerpts, and expected action sequences.
+- `layouts.ps1`: editable slide diagrams and code layouts; the blocked-mug figure
+  is the one attributed raster illustration.
+- `build_slides.ps1`: PowerPoint generation/export/reopen, token/source checks,
+  text fit, and protected-file checks.
+- `LessonChecks.cs`: independent checker scoped to this scene and PDDL example.
+  It is not Pyperplan or a general planning implementation.
+- `review_slides.ps1`: contact sheets, slide/note order, hidden states, timings,
+  citations, PDF page count, preview count, and protected hashes.
+- `protected_files.json`: original hashes for all 12 demo files and original
+  teaching notes. The baseline is preserved; it must not be refreshed to hide edits.
+- `validation.json`, `review.json`: generated slide-build evidence.
+- `python_validation.json`: actual existing Python-suite and headless trace
+  results, separate from the independent C# checks.
+- `assets/README.md`: illustration attribution and optional extraction details.
 
-Preview sheets: [1–6](preview/contact_01.png), [7–12](preview/contact_02.png), [13–18](preview/contact_03.png), [19–24](preview/contact_04.png), [25–27](preview/contact_05.png). Individual PowerPoint renders are `preview/slide_*.png`.
+Use [the updated teaching guide](../TEACHING_NOTES_UPDATED.md) for the current
+schedule. The original `TEACHING_NOTES.md` is retained unchanged as historical
+material. The generated [presentation plan](../PRESENTATION_PLAN.md) carries
+per-slide notes and source excerpts.
 
-Teaching/code text uses 24 pt or larger; headers and footers use 16 pt, and mathematical subscripts are smaller. Diagrams and equations are editable shapes/text. The demo transition uses the unchanged saved rejection image.
+## Validation and classroom boundary
 
-## Checks and rehearsal boundary
+The original ten Python tests and the headless trace pass. The suite includes
+noninteractive Agg interface/playback/reset checks. It confirms the four-action
+candidate, third-action rejection, exact directed/load-specific refinement,
+six-action revision, goal completion, and unchanged authored problem. See the
+record for exact commands and output. Temporary dependency installation did not
+change demo code, configuration, images, requirements, or the runbook.
 
-Independent C# checks reproduce the four-action BFS candidate, third-action rejection, exact directed/load-specific refinement, six-action revision, pickup/place fact changes, goal completion, unchanged original state, 0.20 m shortcut clearance, empty/tangent/loaded footprint results, workspace boundaries and the 16-permission refinement bound. Token comparison verifies every authored-code excerpt after whitespace rewrapping. The diagram's coordinates/radii/walls are checked against `scene.json`. Source assertions match the explanation to `planning.py`. PowerPoint renders every slide, reopens the saved deck and verifies notes/hidden states. Review verifies all 27 PDF pages and slide/note order. All 13 protected files retain their original hashes.
+The independent C# checks also verify state effects, swept-disk contact/boundary
+behavior, and the finite refinement bound. The builder compares PDDL tokens to
+actual files and checks diagrams against `scene.json`. The exported deck is
+reopened to verify notes and hidden states; PDF and preview counts must be 23.
+Every numbered render receives visual review. These checks do not replace
+classroom GUI rehearsal or a timed presentation rehearsal.
 
-Every preview was visually inspected for readability, overlaps, code parentheses/indentation, diagrams, signs and contrast. This is artifact validation, not classroom rehearsal.
+Rehearse initial → candidate → hypothetical rejection → revision → execution.
+All planning is computed at startup; stage buttons reveal it. Candidate checks do
+not move execution state. Only validated plans animate. The demo checks straight
+swept disks, without PRM, grasp mechanics, dynamics, or hardware execution.
 
-Python is currently unavailable on this Windows machine. The existing **ten Python tests**, headless trace and GUI were read but **not executed here**. The independent checker does not replace Pyperplan/Matplotlib regression tests. Historical TA-machine results in the preserved runbook remain separate from this generation's checks. On the prepared machine, activate the existing environment and run:
-
-```bash
-python -m unittest discover -s week05_task_motion_planning/demo -p 'test_*.py' -v
-python week05_task_motion_planning/demo/demo.py --headless
-python week05_task_motion_planning/demo/demo.py
-```
-
-Rehearse initial → candidate → hypothetical rejection → revision → execution. Computation occurs at startup; stage buttons reveal it. Candidate validation does not modify execution state. Only a validated plan is animated, using parsed action effects at completion. The demo checks straight swept disks, not PRM, grasp mechanics or dynamics. No separate Week 5 professor presentation was supplied.
+Preview sheets: [1–6](preview/contact_01.png), [7–12](preview/contact_02.png),
+[13–18](preview/contact_03.png), [19–23](preview/contact_04.png). Individual renders are `preview/slide_*.png`.
+Teaching text/code is generally 24 pt or larger; diagrams may use smaller
+connector labels, while headers, footers, citations, and subscripts are smaller.
